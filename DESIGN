@@ -1,0 +1,79 @@
+
+Visual Layout
+  theme
+    throughout from freecsstemplates.org
+      http://www.freecsstemplates.org/preview/throughout/
+    mediagroove from icant.co.uk/csstablegallery
+      http://icant.co.uk/csstablegallery/index.php?css=79#r79
+    azulon from icant.co.uk/csstablegallery
+      http://icant.co.uk/csstablegallery/index.php?css=72#r72
+    casablanca from icant.co.uk/csstablegallery
+      http://icant.co.uk/csstablegallery/index.php?css=71#r71
+  layout
+    Big Month Menu on top
+    Dynamic Order Form below that
+      add/remove child row
+        child has
+          name grade food*day
+            food*day is going to be a long 1 dimensional table
+            whose cells can be clicked on and off.
+    PayPal Hand off
+    Order Receipt
+      Since we're going to use an accountless model, ahhh fuck.
+      Should people be able to see their past orders?
+
+    The Admin
+      list of months
+        month/year -> menu edit
+          entree price
+          double price
+        number of orders
+          -> view daily order summary
+        amount of money made
+          -> view individual orders
+            list of orders by showing id name date_of_order
+              -> list of kids and what food was bought for them
+
+Interesting Design Decision
+  No accounts.  Orders are individual.
+  However, we use sessions to remember who their kids were so that
+  their next order will be more streamlined.
+
+Data Model
+  Menu (monthly menu container)
+  MenuItem (item in menu)
+    type: [ Food | Dismissal | Holiday ]
+  Order (order container)
+  OrderItem (person + food + price)
+
+Technical Challenge?  Maybe
+  How many days in a month?
+  Which month should be displayed?
+  Finding the next month.
+  How do I submit a custom order description and order price to PayPal?
+    https://cms.paypal.com/cms_content/US/en_US/files/developer/PP_ExpressCheckoutAPIUserGuide.pdf
+    developer.paypal.com
+      store
+        email: john.b_1289797684_biz@gmail.com
+        password: 289797632
+      customer
+        email: buyer_1289798020_per@gmail.com
+        password: 289797944
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fuck, I feel like an artist.
+I'm designing this beautiful and minimalist lunch ordering system.
+  I want to make it beautiful, though.
+    So uncharacteristic of me to desire sublime beauty this strongly.
+      I'm willing to take action for it.
