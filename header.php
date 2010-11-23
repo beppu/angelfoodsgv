@@ -13,3 +13,7 @@
 -->
 </head>
 <body>
+<?php
+include('configuration.php');
+include('lib/helpers.php');
+?>
