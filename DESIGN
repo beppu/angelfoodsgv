@@ -20,7 +20,9 @@ Visual Layout
     PayPal Hand off
     Order Receipt
       Since we're going to use an accountless model, ahhh fuck.
-      Should people be able to see their past orders?
+      Should people be able to see their past orders?  Perhaps,
+      the answer is that seeing their transaction history through
+      PayPal is good enough.
 
     The Admin
       list of months
