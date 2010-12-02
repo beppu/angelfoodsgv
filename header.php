@@ -3,6 +3,7 @@
 <head>
 <title><?php echo $title ?></title>
 <link rel="stylesheet" type="text/css" href="/css/main.css" />
+<script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
 <!--
 <link rel="stylesheet" type="text/css" href="FIXME" />
 <script type="text/javascript" src="FIXME"></script>
@@ -13,7 +14,3 @@
 -->
 </head>
 <body>
-<?php
-include('configuration.php');
-include('lib/helpers.php');
-?>
