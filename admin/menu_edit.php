@@ -51,9 +51,6 @@ include("../header.php");
   </tbody>
 </table>
 
-
-<div>add day</div>
-
 <?php
 include("../footer.php");
 ?>
