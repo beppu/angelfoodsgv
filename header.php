@@ -16,7 +16,7 @@ Released   : 20100423
 <title><?php echo $title ?></title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="jquery/jquery.slidertron-0.1.js"></script>
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <style type="text/css">
@@ -26,17 +26,14 @@ Released   : 20100423
 <body>
 <!-- end #header-wrapper -->
 <div id="logo">
-  <h1><a href="#">Throughout </a></h1>
-  <p><em> template design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a></em></p>
+  <h1><a href="/">Angel Foods </a></h1>
 </div>
 <div id="header">
   <div id="menu">
     <ul>
-      <li><a href="#" class="first">Homepage</a></li>
-      <li class="current_page_item"><a href="#">Blog</a></li>
-      <li><a href="#">Portfolio</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="/" class="first">Homepage</a></li>
+      <li><a href="/about.php">About</a></li>
+      <li><a href="/contact.php">Contact</a></li>
     </ul>
   </div>
   <!-- end #menu -->
