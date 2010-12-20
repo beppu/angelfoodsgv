@@ -6,6 +6,8 @@ $menu = Menu::find($id);
 if (!$menu) {
   redirect('menu_not_found.php');
 }
+
+$is_admin = true;
 $title = "Admin - Edit Month";
 include("../header.php");
 ?>
@@ -39,7 +41,6 @@ include("../header.php");
         <input type="text" name="title" />
       </td>
       <td>
-        <input type="text" name="body" />
         <input type="text" name="body" />
         <input type="text" name="body" />
         <input type="text" name="body" />

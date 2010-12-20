@@ -17,10 +17,11 @@ Released   : 20100423
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="jquery/jquery.slidertron-0.1.js"></script>
+<script type="text/javascript" src="/js/jquery.slidertron-0.1.js"></script>
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <style type="text/css">
-@import "slidertron.css";
+@import "/css/slidertron.css";
+@import "/css/mediagroove.css";
 </style>
 </head>
 <body>
@@ -31,9 +32,12 @@ Released   : 20100423
 <div id="header">
   <div id="menu">
     <ul>
-      <li><a href="/" class="first">Homepage</a></li>
+      <li><a href="/index.php" class="first">Homepage</a></li>
       <li><a href="/about.php">About</a></li>
       <li><a href="/contact.php">Contact</a></li>
+      <?php if ($is_admin == true) { ?>
+      <li><a href="/admin/index.php">Admin</a></li>
+      <?php } ?>
     </ul>
   </div>
   <!-- end #menu -->
@@ -48,5 +52,10 @@ Released   : 20100423
 </div>
 <!-- end #header -->
 <hr />
+<?php
+if ($show_calendar) {
+  include('cal.php');
+}
+?>
 <div id="page">
   <div id="page-bgtop">

@@ -1,4 +1,5 @@
 <?php
+$is_admin = true;
 $title = "Admin - Add New Month";
 include('../header.php');
 ?>
