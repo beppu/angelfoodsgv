@@ -1,5 +1,5 @@
 <div id="calendar-section">
-  <table id="calendar" width="100%" border="2">
+  <table id="calendar" width="100%">
     <thead>
       <tr>
         <th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th>

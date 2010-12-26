@@ -4,6 +4,10 @@
   margin: 0 auto;
 }
 
+#calendar {
+  border-spacing: 0;
+}
+
 #calendar td {
   height: 5em;
   width: 20%;
