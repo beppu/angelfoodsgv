@@ -138,10 +138,9 @@ class Menu {
     $item->menu_id = $this->id;
     $item->created_on = now();
     $rs = mysql_query(sprintf(
-      "INSERT INTO menu_item (menu_id, day, dow, t, title, body, created_on) VALUES(%d, %d, '%s', '%s', '%s', '%s', '%s')",
+      "INSERT INTO menu_item (menu_id, day, t, title, body, created_on) VALUES(%d, %d, '%s', '%s', '%s', '%s')",
       q($item->menu_id),
       q($item->day),
-      q($item->dow),
       q($item->t),
       q($item->title),
       q($item->body),
