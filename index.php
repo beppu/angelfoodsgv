@@ -16,7 +16,14 @@ $children = array(
 <h2>Order Form</h2>
 <div id="order-section">
   <form id="order">
-    <table width="100%" class="mediagroove" >
+    <table class="mediagroove" width="100%" cellspacing="0" cellpadding="0" >
+      <thead>
+        <tr>
+          <th>Child's Name / Grade</th>
+          <th>Food</th>
+          <th>Price</th>
+        </tr>
+      </thead>
       <tbody>
       <?php 
       foreach ($children as $child) { 
@@ -31,7 +38,7 @@ $children = array(
             food * day
           </td>
 
-          <td>
+          <td class="numeric">
             price
           </td>
         </tr>
@@ -40,6 +47,12 @@ $children = array(
       }
       ?>
       </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="2">Total</th>
+          <td colspan="1" class="numeric">$0.00</td>
+        </tr>
+      </tfoot>
     </table>
   </form>
 </div>

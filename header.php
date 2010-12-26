@@ -23,6 +23,7 @@ Released   : 20100423
 <script type="text/javascript" src="/js/admin.js"></script>
 <?php } ?>
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="/css/main.css" rel="stylesheet" type="text/css" media="screen" />
 <style type="text/css">
 @import "/css/slidertron.css";
 @import "/css/mediagroove.css";

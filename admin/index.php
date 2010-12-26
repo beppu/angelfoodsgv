@@ -28,8 +28,8 @@ include('../header.php');
   ?>
     <tr class="<?php echo $odd ? "odd" : "even" ?>">
       <td><a href="menu_edit.php?id=<?php echo $menu->id ?>"><?php echo sprintf('%02d/%d', $menu->month, $menu->year) ?></a></td>
-      <td>0</td>
-      <td>0</td>
+      <td class="numeric">0</td>
+      <td class="numeric">$0.00</td>
     </tr>
   <?php
     $odd ^= 1;

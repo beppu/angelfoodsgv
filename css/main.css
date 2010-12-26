@@ -1,4 +1,14 @@
+#calendar-section {
+  width: 940px;
+  background: #fff;
+  margin: 0 auto;
+}
+
 #calendar td {
   height: 5em;
   width: 20%;
+}
+
+td.numeric {
+  text-align: right;
 }
