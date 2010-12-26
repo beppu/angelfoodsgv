@@ -12,38 +12,51 @@ $title = "Admin - Edit Month";
 include("../header.php");
 ?>
 
-<div id="factory" style="display:none">
-</div>
-
 <h1><?php echo $title ?></h1>
 
-<div><?php echo sprintf('%02d/%d', $menu->month, $menu->year) ?></div>
+<form class="menu-editor">
+<input type="hidden" id="id" name="id" value="<?= $id ?>" />
 
-<div class="rough">day, type, title, body</div>
-
-<table>
+<table class="mediagroove menu-editor" cellspacing="0" cellpadding="0" width="100%">
+  <thead>
+    <th colspan="2">
+      Date
+    </th>
+    <th>
+      Type
+    </th>
+    <th>
+      Title
+    </th>
+    <th>
+      Extra
+    </th>
+  </thead>
   <tbody>
   <?php
-  $weekdays = $menu->weekdays();
-  foreach ($weekdays as $day) {
+  foreach ($menu->items() as $item) {
+    $body = explode('|', $item->body);
   ?>
     <tr>
-      <td><?php echo $day['day'] ?></td>
-      <td><?php echo $day['dow'] ?></td>
       <td>
-        <select>
-          <option>food</option>
-          <option>dismissal</option>
-          <option>holiday</option>
+        <?= sprintf('%02d/%02d', $menu->month, $item->day) ?>
+        <input type="hidden" name="day" value="<?= $item->day ?>" />
+      </td>
+      <td><?= date('l', $menu->timestamp_for_day($item->day)) ?></td>
+      <td>
+        <select name="t">
+          <option<?= $item->t == 'food'      ? ' selected="selected"' : '' ?>>food</option>
+          <option<?= $item->t == 'dismissal' ? ' selected="selected"' : '' ?>>dismissal</option>
+          <option<?= $item->t == 'holiday'   ? ' selected="selected"' : '' ?>>holiday</option>
         </select>
       </td>
-      <td>
-        <input type="text" name="title" />
+      <td class="title">
+        <input size="16" type="text" name="title" value="<?= $item->title ?>"<?= $item->t == 'dismissal' ? ' disabled="disabled"' : '' ?>/>
       </td>
-      <td>
-        <input type="text" name="body" />
-        <input type="text" name="body" />
-        <input type="text" name="body" />
+      <td class="extra">
+        <input size="12" type="text" name="body" value="<?= $body[0] ?>"<?= ($item->t == 'holiday' || $item->t == 'dismissal') ? ' disabled="disabled"' : '' ?>/>
+        <input size="12" type="text" name="body" value="<?= $body[1] ?>"<?= ($item->t == 'holiday' || $item->t == 'dismissal') ? ' disabled="disabled"' : '' ?>/>
+        <input size="12" type="text" name="body" value="<?= $body[2] ?>"<?= ($item->t == 'holiday' || $item->t == 'dismissal') ? ' disabled="disabled"' : '' ?>/>
       </td>
     </tr>
   <?php
@@ -51,6 +64,8 @@ include("../header.php");
   ?>
   </tbody>
 </table>
+
+</form>
 
 <?php
 include("../footer.php");

@@ -10,6 +10,9 @@ function config() {
  *
  */
 function q($s) {
+  if (get_magic_quotes_gpc()) {
+    return $s;
+  }
   return mysql_real_escape_string($s);
 }
 

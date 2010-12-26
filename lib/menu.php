@@ -14,7 +14,7 @@ class Menu {
    *
    */
   static function find($id) {
-    $rs = mysql_query(sprintf("SELECT * FROM menu WHERE id = %s", q($id)));
+    $rs = mysql_query(sprintf("SELECT * FROM menu WHERE id = %d", q($id)));
     $menu = mysql_fetch_object($rs, 'Menu');
     return $menu;
   }
@@ -48,6 +48,16 @@ class Menu {
       q($this->year), q($this->month), now()
     ));
     $this->id = mysql_insert_id();
+    foreach ($this->weekdays() as $d) {
+      $item = new stdClass();
+      $item->menu_id = $this->id;
+      $item->day     = $d['day'];
+      $item->dow     = $d['dow'];
+      $item->t       = 'food';
+      $item->title   = '';
+      $item->body    = '';
+      $this->add_item($item);
+    }
     return $rs;
   }
 
@@ -79,7 +89,9 @@ class Menu {
   }
 
   /**
+   * The weekdays of this month
    *
+   * @return array [ { "day": n, "dow": dayOfWeek }, ... ]
    */
   function weekdays() {
     $weekdays = array();
@@ -97,15 +109,61 @@ class Menu {
   }
 
   /**
+   * Return all of the menu's items.
    *
+   * @return array<stdClass> this month's menu items
    */
-  function add($item) {
+  function items() {
+    $rs = mysql_query(sprintf("SELECT * FROM menu_item WHERE menu_id = %d ORDER by day", q($this->id)));
+    $items = array();
+    while ($item = mysql_fetch_object($rs)) {
+      array_push($items, $item);
+    }
+    return $items;
+  }
+
+  /**
+   * Find the item for the given day.
+   */
+  function find_item_for_day($day) {
+    $rs = mysql_query(sprintf("SELECT * FROM menu_item WHERE menu_id = %d AND day = %d", q($this->id), q($day)));
+    $item = mysql_fetch_object($rs);
+    return $item;
   }
 
   /**
    *
    */
-  function remove($item) {
+  function add_item($item) {
+    $item->menu_id = $this->id;
+    $item->created_on = now();
+    $rs = mysql_query(sprintf(
+      "INSERT INTO menu_item (menu_id, day, dow, t, title, body, created_on) VALUES(%d, %d, '%s', '%s', '%s', '%s', '%s')",
+      q($item->menu_id),
+      q($item->day),
+      q($item->dow),
+      q($item->t),
+      q($item->title),
+      q($item->body),
+      q($item->created_on)
+    ));
+    $item->id = mysql_insert_id();
+    return $item;
+  }
+
+  /**
+   *
+   */
+  function update_item($item) {
+    $rs = mysql_query(sprintf(
+      "UPDATE menu_item SET day = %d, t = '%s', title = '%s', body = '%s' WHERE id = %d",
+      q($item->day),
+      q($item->t),
+      q($item->title),
+      q($item->body),
+      q($item->id)
+    ));
+    return $rs;
   }
 
 }
