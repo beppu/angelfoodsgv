@@ -1,5 +1,4 @@
 <?php
-require_once('../configuration.php');
 
 function config() {
   global $config;
@@ -38,4 +37,5 @@ function db() {
   );
   mysql_select_db($config->db);
 }
+
 ?>

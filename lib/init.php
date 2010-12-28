@@ -1,4 +1,5 @@
 <?php
+# TODO - use absolute paths somehow
 require_once('../configuration.php');
 require_once('helpers.php');
 require_once('db.php');

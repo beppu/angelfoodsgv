@@ -1,4 +1,12 @@
 <?php
+require_once('configuration.php');
+require_once('lib/helpers.php');
+require_once('lib/db.php');
+require_once('lib/menu.php');
+date_default_timezone_set('America/Los_Angeles');
+db();
+session_start();
+
 $title = "Angel Foods";
 $show_calendar = true;
 include('header.php');
@@ -12,14 +20,16 @@ $children = array(
   2 => "Mary",
   3 => "Jane"
 );
+$food_days = $menu->items('food');
 ?>
-<h2>Order Form</h2>
+<h1>Order Form</h1>
 <div id="order-section">
-  <form id="order">
-    <table class="mediagroove" width="100%" cellspacing="0" cellpadding="0" >
+  <form id="order" method="post" action="order.php">
+    <table class="mediagroove" cellspacing="0" cellpadding="0" width="100%">
       <thead>
         <tr>
-          <th>Child's Name / Grade</th>
+          <th>Child's Name</th>
+          <th>Grade</th>
           <th>Food</th>
           <th>Price</th>
         </tr>
@@ -31,11 +41,19 @@ $children = array(
         <tr>
           <td>
             <?php echo "$i $child" ?>
-            name and grade
+            name
           </td>
 
           <td>
-            food * day
+            grade
+          </td>
+
+          <td>
+            <ul class="picker">
+            <?php foreach ($food_days as $item) { ?>
+              <li><?= $item->day < 10 ? "&nbsp;" : "" ?><?= $item->day ?></li>
+            <?php } ?>
+            </ul>
           </td>
 
           <td class="numeric">
@@ -49,11 +67,14 @@ $children = array(
       </tbody>
       <tfoot>
         <tr>
-          <th colspan="2">Total</th>
+          <th colspan="3">Total</th>
           <td colspan="1" class="numeric">$0.00</td>
         </tr>
       </tfoot>
     </table>
+    <div id="buttons">
+      <input type="submit" name="submit" value="Purchase Lunches" />
+    </div>
   </form>
 </div>
 

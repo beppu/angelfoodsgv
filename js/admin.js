@@ -21,9 +21,9 @@
           title  : tr.find('input[name=title]').val(),
           body   : bodyStrings.join("|")
         };
-        console.log(item);
+        // TODO - start save notice
         $.post('/admin/menu.php', item, function(response, headers){
-          console.log(response);
+          // TODO - stop save notice
         });
         tr.data('lastSerialize', latestSerialize);
       }
@@ -32,7 +32,6 @@
     // menu-editor
     {
       // init
-
       $('table.menu-editor tbody tr').each(function(i,el){
         var tr = $(el);
         menuId = $('#id').val();

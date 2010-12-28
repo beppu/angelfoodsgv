@@ -17,3 +17,8 @@ create table menu_item (
   created_on datetime,
   modified_on timestamp
 );
+
+create table config (
+  id int,
+  current_menu_id int
+);

@@ -1,7 +1,17 @@
+td.numeric {
+  text-align: right;
+}
+
 #calendar-section {
   width: 940px;
-  background: #fff;
+  background: #FFFFFF;
   margin: 0 auto;
+}
+
+#calendar-section h1 {
+  padding: 0.5em;
+  background-color: #24130F;
+  text-transform: none;
 }
 
 #calendar {
@@ -9,10 +19,56 @@
 }
 
 #calendar td {
-  height: 5em;
+  height: 180px;
   width: 20%;
+  vertical-align: top;
 }
 
-td.numeric {
-  text-align: right;
+#calendar td.none {
+  background-color: #000000;
 }
+
+#calendar td.dismissal {
+  background-color: #FF99CC;
+}
+
+#calendar td.holiday {
+  background-color: #FFCCEE;
+}
+
+#calendar td h4 {
+  margin: 4px 4px;
+  text-align: left;
+}
+
+#calendar td ul {
+  list-style: none;
+}
+
+#order-section {
+  padding: 1em;
+}
+
+#buttons {
+  margin: 1em 0;
+}
+
+#buttons input {
+  font-size: 2em;
+}
+
+ul.picker {
+  padding: 0;
+  margin: 0;
+}
+
+ul.picker li {
+  display: inline;
+  padding: 2px;
+  margin: 0;
+  background: #FFFFFF;
+  font-size: x-small;
+  border: 1px solid black;
+  cursor: pointer;
+}
+

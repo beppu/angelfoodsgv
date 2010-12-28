@@ -29,6 +29,24 @@ class Menu {
   }
 
   /**
+   * Return currently active menu
+   */
+  static function current() {
+    $rs = mysql_query("SELECT menu.* FROM menu, config WHERE menu.id = config.current_menu_id");
+    $menu = mysql_fetch_object($rs, 'Menu');
+    return $menu;
+  }
+
+  /**
+   * Make the given menu_id be the "current" menu.
+   * @param int $id   a menu id
+   */
+  static function set_current($id) {
+    $rs = mysql_query(sprintf("UPDATE config SET current_menu_id = %d", q($id)));
+    return $rs;
+  }
+
+  /**
    *
    */
   static function list_all() {
@@ -113,8 +131,14 @@ class Menu {
    *
    * @return array<stdClass> this month's menu items
    */
-  function items() {
-    $rs = mysql_query(sprintf("SELECT * FROM menu_item WHERE menu_id = %d ORDER by day", q($this->id)));
+  function items($t=null) {
+    $query = "";
+    if ($t) {
+      $query = sprintf("SELECT * FROM menu_item WHERE menu_id = %d AND t = '%s' ORDER by day", q($this->id), q($t));
+    } else {
+      $query = sprintf("SELECT * FROM menu_item WHERE menu_id = %d ORDER by day", q($this->id));
+    }
+    $rs = mysql_query($query);
     $items = array();
     while ($item = mysql_fetch_object($rs)) {
       array_push($items, $item);
