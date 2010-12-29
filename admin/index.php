@@ -16,9 +16,9 @@ include('../header.php');
 <table id="menus" class="mediagroove" width="100%" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
-      <th>Year/Month</th>
-      <th># of Orders</th>
-      <th>$</th>
+      <th>Menu</th>
+      <th class="numeric" width="20%"># of Orders</th>
+      <th class="numeric" width="20%">Income</th>
     </tr>
   </thead>
   <tbody>

@@ -7,7 +7,7 @@ $next_month = Menu::next_month();
 include('../header.php');
 ?>
 
-<h1><?php echo $title ?></h1>
+<h1><a href="index.php">Admin</a> &#x27a4; Add New Month</h1>
 
 <div id="add-month-section">
 <form method="post" action="menu.php">

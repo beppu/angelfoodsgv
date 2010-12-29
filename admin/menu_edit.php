@@ -12,7 +12,7 @@ $title = "Admin - Edit Month";
 include("../header.php");
 ?>
 
-<h1><?php echo $title ?></h1>
+<h1><a href="index.php">Admin</a> &#x27a4; Edit Menu</h1>
 
 <form class="menu-editor">
 <input type="hidden" id="id" name="id" value="<?= $id ?>" />
