@@ -32,7 +32,7 @@ $menu = Menu::current();
 $weeks = weeks($menu, $menu->items());
 ?>
 <div id="calendar-section">
-  <h1>Menu for <?= sprintf('%02d/%d', $menu->month, $menu->year) ?></h1>
+  <h1><?= strftime('%B %Y Lunch Menu', $menu->timestamp_for_day(2)) ?></h1>
   <table id="calendar" width="100%">
     <thead>
       <tr>
