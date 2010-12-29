@@ -32,7 +32,7 @@ Released   : 20100423
 <body>
 <!-- end #header-wrapper -->
 <div id="logo">
-  <h1><a href="/">Angel Foods </a></h1>
+  <h1><a href="/">Angel Foods (...is under construction and does not work, yet).</a></h1>
 </div>
 <div id="header">
   <div id="menu">
