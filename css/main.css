@@ -39,10 +39,12 @@ td.numeric {
 
 #calendar td h4 {
   margin: 4px 4px;
+  color: #808020;
   text-align: left;
 }
 
 #calendar td h5 {
+  color: #002020;
   font-size: 1em;
 }
 
