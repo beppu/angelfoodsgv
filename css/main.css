@@ -42,6 +42,10 @@ td.numeric {
   text-align: left;
 }
 
+#calendar td h5 {
+  font-size: 1em;
+}
+
 #calendar td ul {
   list-style: none;
 }
@@ -50,12 +54,29 @@ td.numeric {
   padding: 1em;
 }
 
+#order div.family-info {
+  padding: 1em 0 2em 0;
+}
+
+#order td.closer {
+  text-align: center;
+  cursor: pointer;
+}
+
 #buttons {
   margin: 1em 0;
 }
 
 #buttons input {
   font-size: 2em;
+}
+
+#buttons div.add {
+  float: left;
+}
+
+#buttons div.purchase {
+  float: right;
 }
 
 ul.picker {
@@ -67,9 +88,19 @@ ul.picker li {
   display: inline;
   padding: 2px;
   margin: 0;
-  background: #FFFFFF;
   font-size: x-small;
   border: 1px solid black;
   cursor: pointer;
 }
 
+ul.picker li.none {
+  background: #FFFFFF;
+}
+
+ul.picker li.regular {
+  background: #D0FFD0;
+}
+
+ul.picker li.double {
+  background: #90D090;
+}
