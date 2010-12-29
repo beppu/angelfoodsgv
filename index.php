@@ -1,11 +1,5 @@
 <?php
-require_once('configuration.php');
-require_once('lib/helpers.php');
-require_once('lib/db.php');
-require_once('lib/menu.php');
-date_default_timezone_set('America/Los_Angeles');
-db();
-session_start();
+require_once('init.php');
 
 $title = "Angel Foods";
 $show_calendar = true;
