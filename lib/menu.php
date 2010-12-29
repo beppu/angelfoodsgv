@@ -50,12 +50,27 @@ class Menu {
    *
    */
   static function list_all() {
-    $rs = mysql_query("SELECT * FROM menu ORDER BY year desc, month desc;");
+    $rs = mysql_query("SELECT * FROM menu ORDER BY year DESC, month DESC;");
     $menus = array();
     while ($menu = mysql_fetch_object($rs, 'Menu')) {
       array_push($menus, $menu);
     }
     return $menus;
+  }
+
+  /**
+   * Figure out what year and month the next menu should be.
+   */
+  static function next_month() {
+    $rs = mysql_query("SELECT year, month FROM menu ORDER BY year DESC, month DESC LIMIT 1");
+    $timing = mysql_fetch_object($rs);
+    if ($timing->month == 12) {
+      $timing->year++;
+      $timing->month = 1;
+    } else {
+      $timing->month++;
+    }
+    return $timing;
   }
 
   /**
