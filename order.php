@@ -1,5 +1,6 @@
 <?php
 require_once('init.php');
+header('Content-Type: text/plain');
 
-redirect('index.php');
+var_dump($_POST);
 ?>
