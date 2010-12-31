@@ -22,8 +22,10 @@
           body   : bodyStrings.join("|")
         };
         // TODO - start save notice
+        tr.find('span.saving').html('...');
         $.post('/admin/menu.php', item, function(response, headers){
           // TODO - stop save notice
+          setTimeout(function(){ tr.find('span.saving').html('') }, 300);
         });
         tr.data('lastSerialize', latestSerialize);
       }
@@ -68,6 +70,20 @@
           default:
             break;
         }
+      });
+    }
+
+    // setting default menu
+    {
+      $('table#menus td.current').click(function(ev){
+        var menuId = this.id.replace(/menu-current-/, '');
+        var self = this;
+        $.post('menu.php', { action: 'set_current', id: menuId }, function(response){
+          $('table#menus td.current').each(function(i, td){
+            $(td).html('');
+          });
+          $(self).html('*');
+        });
       });
     }
 
