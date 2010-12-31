@@ -16,6 +16,7 @@ include('../header.php');
 <table id="menus" class="mediagroove" width="100%" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
+      <th width="10px">*</th>
       <th>Menu</th>
       <th class="numeric" width="20%"># of Orders</th>
       <th class="numeric" width="20%">Income</th>
@@ -23,16 +24,15 @@ include('../header.php');
   </thead>
   <tbody>
   <?php
-  $odd = 1;
   foreach ($menus as $menu) {
   ?>
-    <tr class="<?php echo $odd ? "odd" : "even" ?>">
+    <tr>
+      <td id="menu-current-<?= $menu->id ?>" class="current"><?= $menu->is_current ? "*" : "&nbsp;" ?></td>
       <td><a href="menu_edit.php?id=<?php echo $menu->id ?>"><?php echo sprintf('%02d/%d', $menu->month, $menu->year) ?></a></td>
       <td class="numeric">0</td>
       <td class="numeric">$0.00</td>
     </tr>
   <?php
-    $odd ^= 1;
   }
   ?>
   </tbody>

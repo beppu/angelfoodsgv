@@ -26,6 +26,7 @@ Visual Layout
 
     The Admin
       list of months
+        set current month
         month/year -> menu edit
           entree price
           double price

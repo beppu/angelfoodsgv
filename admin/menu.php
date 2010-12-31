@@ -14,9 +14,17 @@ switch($action) {
     if (is_numeric($_POST['month'])) {
       $month = $_POST['month'];
     }
+    if (is_numeric($_POST['regular_price'])) {
+      $regular_price = $_POST['regular_price'];
+    }
+    if (is_numeric($_POST['double_price'])) {
+      $double_price = $_POST['double_price'];
+    }
     $menu = new Menu();
     $menu->year = $year;
     $menu->month = $month;
+    $menu->regular_price = $regular_price;
+    $menu->double_price = $double_price;
     $menu->create();
     redirect('menu_edit.php?id='.$menu->id);
     break;
@@ -43,6 +51,17 @@ switch($action) {
       } else {
         $item = $menu->add_item($item);
       }
+      echo json_encode(array("success" => 1));
+    }
+    break;
+
+  case 'set_current':
+    $id = $_POST['id'];       # menu_id
+    $menu = Menu::find($id);
+    if (!$menu) {
+      echo json_encode(array("success" => 0));
+    } else {
+      Menu::set_current($id);
       echo json_encode(array("success" => 1));
     }
     break;

@@ -1,0 +1,13 @@
+#commands {
+  padding: 1em;
+}
+
+#add-menu-section {
+  padding: 1em;
+}
+
+td.current {
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+}

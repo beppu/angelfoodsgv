@@ -25,7 +25,7 @@ include("../header.php");
     <th>
       Type
     </th>
-    <th>
+    <th width="167">
       Title
     </th>
     <th>
@@ -52,6 +52,7 @@ include("../header.php");
       </td>
       <td class="title">
         <input size="16" type="text" name="title" value="<?= $item->title ?>"<?= $item->t == 'dismissal' ? ' disabled="disabled"' : '' ?>/>
+        <span class="saving"></span>
       </td>
       <td class="extra">
         <input size="12" type="text" name="body" value="<?= $body[0] ?>"<?= ($item->t == 'holiday' || $item->t == 'dismissal') ? ' disabled="disabled"' : '' ?>/>
