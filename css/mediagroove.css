@@ -12,7 +12,8 @@
   color: #FFAA00;
 }
 .mediagroove thead th {
-  background: url(/images/bg_th.jpg) no-repeat right;
+  /* background: url(/images/bg_th.jpg) no-repeat right; */
+  background: #999999;
   height: 47px;
   color: #FFFFFF;
   font-size: 1.2em;
@@ -48,12 +49,21 @@
   text-decoration: underline;
 }
 .mediagroove tfoot th {
+  /* 
   background: url(/images/bg_total.jpg) repeat-x bottom;
   color: #FFFFFF;
+  */
+  background: #FFFFFF;
+  color: #777777;
   height: 30px;
 }
 .mediagroove tfoot td {
+  /*
   background: url(/images/bg_total.jpg) repeat-x bottom;
   color: #FFFFFF;
+  */
+  background: #EEEEEE;
+  color: #777777;
   height: 30px;
+  font-size: 1.2em;
 }

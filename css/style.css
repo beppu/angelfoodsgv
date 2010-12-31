@@ -18,7 +18,8 @@ h1, h2, h3 {
   margin: 0;
   /* text-transform: uppercase; */
   font-weight: normal;
-  color: #549900;
+  /* color: #549900; */
+  color: #EDEF0E;
 }
 
 h1 { font-size: 44px; }

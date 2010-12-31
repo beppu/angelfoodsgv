@@ -44,6 +44,7 @@ td.numeric {
 }
 
 #calendar td h5 {
+  margin: 8px 0;
   color: #002020;
   font-size: 1em;
 }
@@ -67,6 +68,7 @@ td.numeric {
 
 #buttons {
   margin: 1em 0;
+  padding-bottom: 1em;
 }
 
 #buttons input {
@@ -75,6 +77,9 @@ td.numeric {
 
 #buttons div.add {
   float: left;
+  padding: 1em;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 #buttons div.purchase {
@@ -82,6 +87,7 @@ td.numeric {
 }
 
 ul.picker {
+  display: inline;
   padding: 0;
   margin: 0;
 }
@@ -90,6 +96,7 @@ ul.picker li {
   display: inline;
   padding: 2px;
   margin: 0;
+  font-family: fixed;
   font-size: x-small;
   border: 1px solid black;
   cursor: pointer;
@@ -100,9 +107,15 @@ ul.picker li.none {
 }
 
 ul.picker li.regular {
-  background: #D0FFD0;
+  background: #C0FFC0;
 }
 
 ul.picker li.double {
   background: #90D090;
+  color: #FFFFFF;
+}
+
+span.all {
+  color: #4999CB;
+  cursor: pointer;
 }

@@ -21,6 +21,7 @@ Released   : 20100423
 <script type="text/javascript" src="/js/main.js"></script>
 <?php if ($is_admin) { ?>
 <script type="text/javascript" src="/js/admin.js"></script>
+<link href="/css/admin.css" rel="stylesheet" type="text/css" media="screen" />
 <?php } ?>
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/css/main.css" rel="stylesheet" type="text/css" media="screen" />
@@ -32,7 +33,7 @@ Released   : 20100423
 <body>
 <!-- end #header-wrapper -->
 <div id="logo">
-  <h1><a href="/">Angel Foods (...is under construction and does not work, yet).</a></h1>
+  <h1><a href="/">Angel Foods</a></h1>
 </div>
 <div id="header">
   <div id="menu">
