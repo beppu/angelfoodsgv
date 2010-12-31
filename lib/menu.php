@@ -7,6 +7,9 @@ class Menu {
   public $id;
   public $year;
   public $month;
+  public $regular_price;
+  public $double_price;
+  public $is_current;  // only available via list_all() at the moment
   public $created_on;
   public $modified_on;
 
@@ -50,7 +53,7 @@ class Menu {
    *
    */
   static function list_all() {
-    $rs = mysql_query("SELECT * FROM menu ORDER BY year DESC, month DESC;");
+    $rs = mysql_query("SELECT menu.*, (config.current_menu_id = menu.id) as is_current FROM menu, config WHERE config.id = 1 ORDER BY year DESC, month DESC;");
     $menus = array();
     while ($menu = mysql_fetch_object($rs, 'Menu')) {
       array_push($menus, $menu);
@@ -77,8 +80,8 @@ class Menu {
    *
    */
   function create() {
-    $rs = mysql_query(sprintf("INSERT INTO menu (year, month, created_on) VALUES (%d, %d, '%s')",
-      q($this->year), q($this->month), now()
+    $rs = mysql_query(sprintf("INSERT INTO menu (year, month, regular_price, double_price, created_on) VALUES (%d, %d, %f, %f, '%s')",
+      q($this->year), q($this->month), q($this->regular_price), q($this->double_price), now()
     ));
     $this->id = mysql_insert_id();
     foreach ($this->weekdays() as $d) {
