@@ -37,6 +37,21 @@ class Purchase {
     $this->id = mysql_insert_id();
     return $rs;
   }
+
+
+  /**
+   * Add an item to the purchase
+   *
+   * @param   PurchaseItem $item    the thing that is being bought
+   * @return  boolean               Was the insert successful?
+   */
+  function add_item($item) {
+    $rs = mysql_query(sprintf("INSERT INTO purchase_item (purchase_id, day, child_name, child_grade, item_name, item_price, created_on) VALUES (%d, %d, '%s', %d, '%s', %0.2f, '%s')",
+      q($this->id), q($item->day), q($item->child_name), q($item->child_grade), q($item->item_name), $item->item_price, now()
+    ));
+    $item->id = mysql_insert_id();
+    return $rs;
+  }
 }
 
 /**
