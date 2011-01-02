@@ -61,6 +61,10 @@ td.numeric {
   padding: 1em 0 2em 0;
 }
 
+#order div.family-info input {
+  font-size: 2em;
+}
+
 #order td.closer {
   text-align: center;
   cursor: pointer;

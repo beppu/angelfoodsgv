@@ -38,7 +38,7 @@ Released   : 20100423
 <div id="header">
   <div id="menu">
     <ul>
-      <li><a href="/index.php" class="first">Homepage</a></li>
+      <li><a href="/" class="first">Homepage</a></li>
       <li><a href="/about.php">About</a></li>
       <li><a href="/contact.php">Contact</a></li>
       <?php if ($is_admin == true) { ?>
@@ -48,10 +48,11 @@ Released   : 20100423
   </div>
   <!-- end #menu -->
   <div id="search">
-    <form method="get" action="">
+    <form method="get" action="http://www.google.com/search">
       <fieldset>
-        <input type="text" name="s" id="search-text" size="15" />
+        <input type="text" name="q" id="search-text" size="15" />
       </fieldset>
+      <input type="hidden" name="as_sitesearch" value="angelfoodsgv.com" />
     </form>
   </div>
   <!-- end #search -->
