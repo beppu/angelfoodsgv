@@ -17,7 +17,7 @@ include('../header.php');
   Year: 
   <input type="text" size="6" name="year" value="<?= $next_month->year ?>" />
   Regular Price:
-  <input type="text" size="6" name="regular_price" value="<?= sprintf('%0.2f', $config->default_price) ?>" />
+  <input type="text" size="6" name="regular_price" value="<?= sprintf('%0.2f', $config->default_regular_price) ?>" />
   Double Price:
   <input type="text" size="6" name="double_price" value="<?= sprintf('%0.2f', $config->default_double_price) ?>" />
   &nbsp;

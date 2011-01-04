@@ -5,6 +5,6 @@ $config->db_host     = "localhost:3306";
 $config->db_user     = "root";
 $config->db_password = "";
 
-$config->default_price        = 5.00;
-$config->default_double_price = 1.00;
+$config->default_regular_price = 5.00;
+$config->default_double_price  = 6.00;
 ?>
