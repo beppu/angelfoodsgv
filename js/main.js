@@ -14,10 +14,22 @@
     // recalculate totals
     var totals = function(){
       $('#order table.mediagroove tbody tr').each(function(i,tr){
-        var tr = $(tr);
-        var r = tr.find('ul.picker li.regular').length;
-        var d = tr.find('ul.picker li.double').length;
+        var tr    = $(tr);
+        var days  = tr.find('input[type=hidden]');
+        var li    = tr.find('ul.picker li');
+        var r     = tr.find('ul.picker li.regular').length;
+        var d     = tr.find('ul.picker li.double').length;
         var total = ((r * 5) + (d * 6)).toFixed(2);
+
+        var hidden = $.makeArray(li.map(function(i,x){
+          var day = $(x);
+          if (!day.hasClass('none')) {
+            var n = day.text().replace(/^\s*/,'');
+            return n + "-" + day.attr('class');
+          }
+        })).join(',');
+        days.val(hidden);
+
         tr.find('td.total').html('$'+total);
       });
       var grandTotal = 0;
@@ -39,8 +51,9 @@
 
     // choosing meals
     $('#order ul.picker li').live('click', function(ev){
+      var li   = $(this);
+
       // none -> regular -> double -> none
-      var li = $(this);
       if (li.hasClass('none')) {
         li.removeClass('none').addClass('regular');
       } else if (li.hasClass('regular')) {
