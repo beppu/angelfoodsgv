@@ -3,10 +3,10 @@ require_once('init.php');
 require_once('lib/purchase.php');
 
 function day_and_order($string) {
-  $list = explode('-', $string);
-  $d = new stdClass();
-  $d->day($list[0]);
-  $d->order($list[1]);
+  $list     = explode('-', $string);
+  $d        = new stdClass();
+  $d->day   = $list[0];
+  $d->order = $list[1];
   return $d;
 }
 
