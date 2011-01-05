@@ -34,7 +34,10 @@ class Purchase {
     $rs = mysql_query(sprintf("INSERT INTO purchase (menu_id, session_id, family_name, phone_number, status, created_on) VALUES (%d, '%s', '%s', '%s', '%s', '%s')",
       q($this->menu_id), q($this->session_id), q($this->family_name), q($this->phone_number), q($this->status), now()
     ));
-    $this->id = mysql_insert_id();
+    if ($rs) {
+      $this->id = mysql_insert_id();
+      $rs2 = mysql_query(sprintf("UPDATE purchase SET receipt_id = '%s'", sha1($this->id)));
+    }
     return $rs;
   }
 
@@ -46,8 +49,8 @@ class Purchase {
    * @return  boolean               Was the insert successful?
    */
   function add_item($item) {
-    $rs = mysql_query(sprintf("INSERT INTO purchase_item (purchase_id, day, child_name, child_grade, item_name, item_price, created_on) VALUES (%d, %d, '%s', %d, '%s', %0.2f, '%s')",
-      q($this->id), q($item->day), q($item->child_name), q($item->child_grade), q($item->item_name), $item->item_price, now()
+    $rs = mysql_query(sprintf("INSERT INTO purchase_item (purchase_id, day, child_name, child_grade, price, created_on) VALUES (%d, %d, '%s', %d, %0.2f, '%s')",
+      q($this->id), q($item->day), q($item->child_name), q($item->child_grade), $item->price, now()
     ));
     $item->id = mysql_insert_id();
     return $rs;
