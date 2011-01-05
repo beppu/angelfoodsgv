@@ -59,6 +59,8 @@ $food_days = $menu->items('food');
 
   <form id="order" method="post" action="order.php">
     <input type="hidden" name="menu_id" value="<?= $menu->id ?>" />
+    <input type="hidden" id="regular_price" name="regular_price" value="<?= $menu->regular_price ?>" />
+    <input type="hidden" id="double_price" name="double_price" value="<?= $menu->double_price ?>" />
 
     <div class="family-info">
       <h4>Family Name</h4>

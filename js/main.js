@@ -11,6 +11,11 @@
       $('table.mediagroove tbody tr:odd').addClass('odd');
     };
 
+    var price = {
+      regular : parseFloat($('#regular_price').val()),
+      double  : parseFloat($('#double_price').val())
+    };
+
     // recalculate totals
     var totals = function(){
       $('#order table.mediagroove tbody tr').each(function(i,tr){
@@ -19,7 +24,7 @@
         var li    = tr.find('ul.picker li');
         var r     = tr.find('ul.picker li.regular').length;
         var d     = tr.find('ul.picker li.double').length;
-        var total = ((r * 5) + (d * 6)).toFixed(2);
+        var total = ((r * price.regular) + (d * price.double)).toFixed(2);
 
         var hidden = $.makeArray(li.map(function(i,x){
           var day = $(x);
