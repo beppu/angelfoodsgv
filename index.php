@@ -45,7 +45,7 @@ $food_days = $menu->items('food');
             <?php } ?>
             </ul>
             <span class="all">all</span>
-            <input type="hidden" name="days[]" />
+            <input type="hidden" name="order[]" />
           </td>
           <td class="numeric total">$0.00</td>
         </tr>
