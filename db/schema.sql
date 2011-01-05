@@ -27,6 +27,7 @@ create table config (
   current_menu_id int
 );
 
+-- add sha1 receipt_id
 create table purchase (
   id int not null primary key auto_increment,
   menu_id int not null,
@@ -45,7 +46,7 @@ create table purchase_item (
   day int not null,
   child_name varchar(48) not null,
   child_grade int not null,
-  item_name varchar(48) not null,
+  item_name varchar(48) not null, -- XXX
   item_price decimal(8,2) not null,
   created_on datetime,
   modified_on timestamp,
