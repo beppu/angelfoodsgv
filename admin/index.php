@@ -18,8 +18,9 @@ include('../header.php');
     <tr>
       <th width="10px">*</th>
       <th>Menu</th>
-      <th class="numeric" width="20%"># of Orders</th>
-      <th class="numeric" width="20%">Income</th>
+      <th class="numeric" width="15%"># of Orders</th>
+      <th class="numeric" width="15%"># of Meals</th>
+      <th class="numeric" width="15%">Income</th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +30,7 @@ include('../header.php');
     <tr>
       <td id="menu-current-<?= $menu->id ?>" class="current"><?= $menu->is_current ? "*" : "&nbsp;" ?></td>
       <td><a href="menu_edit.php?id=<?php echo $menu->id ?>"><?php echo sprintf('%02d/%d', $menu->month, $menu->year) ?></a></td>
+      <td class="numeric">0</td>
       <td class="numeric">0</td>
       <td class="numeric">$0.00</td>
     </tr>
