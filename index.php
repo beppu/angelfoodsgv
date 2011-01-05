@@ -13,6 +13,8 @@ $children = array(
   2 => "",
   3 => ""
 );
+
+# $menu is initialized in header.php
 $food_days = $menu->items('food');
 ?>
 <div id="factory" style="display: none;">
@@ -56,6 +58,7 @@ $food_days = $menu->items('food');
 <div id="order-section">
 
   <form id="order" method="post" action="order.php">
+    <input type="hidden" name="menu_id" value="<?= $menu->id ?>" />
 
     <div class="family-info">
       <h4>Family Name</h4>
@@ -82,7 +85,7 @@ $food_days = $menu->items('food');
         <tr>
           <td class="closer">X</td>
           <td>
-            <input type="text" name="name[]" value="<?php echo "$child" ?>" />
+            <input type="text" name="name[]" value="<?= $child ?>" />
           </td>
 
           <td>
@@ -105,7 +108,7 @@ $food_days = $menu->items('food');
             <?php } ?>
             </ul>
             <span class="all">all</span>
-            <input type="hidden" name="days[]" />
+            <input type="hidden" name="order[]" />
           </td>
 
           <td class="numeric total">$0.00</td>
