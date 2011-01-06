@@ -101,9 +101,11 @@ class Menu {
    *
    */
   function update() {
-    $rs = mysql_query(sprintf("UPDATE menu SET year = %d, month = %d WHERE id = %d",
+    $rs = mysql_query(sprintf("UPDATE menu SET year = %d, month = %d, regular_price = %0.2f, double_price = %0.2f WHERE id = %d",
       $this->year,
       $this->month,
+      $this->regular_price,
+      $this->double_price,
       $this->id
     ));
     return $rs;

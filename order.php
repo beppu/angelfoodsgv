@@ -90,6 +90,11 @@ if (!$menu) {
 error_log(sprintf("# of errors == %d", count($errors)));
 error_log(sprintf("# of rows   == %d", count($rows)));
 
+$price = array(
+  "regular" => $menu->regular_price,
+  "double"  => $menu->double_price
+);
+
 if (count($errors)) {
   header('Content-Type: text/plain');
   var_dump($_POST);
@@ -112,7 +117,9 @@ if (count($errors)) {
       $purchase->add_item($item);
     }
   }
-  redirect('receipt.php');
+  // TODO - redirect to paypal
+  header('Content-Type: text/plain');
+  var_dump($purchase);
 }
 
 ?>

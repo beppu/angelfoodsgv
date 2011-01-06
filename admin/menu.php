@@ -21,12 +21,35 @@ switch($action) {
       $double_price = $_POST['double_price'];
     }
     $menu = new Menu();
-    $menu->year = $year;
-    $menu->month = $month;
+    $menu->year          = $year;
+    $menu->month         = $month;
     $menu->regular_price = $regular_price;
-    $menu->double_price = $double_price;
-    $menu->create();
-    redirect('menu_edit.php?id='.$menu->id);
+    $menu->double_price  = $double_price;
+    $success = $menu->create();
+    if ($success) {
+      redirect('menu_edit.php?id='.$menu->id);
+    } else {
+      echo "menu could not be created";
+    }
+    break;
+
+  case 'price.update':
+    $id   = $_POST['id'];
+    $menu = Menu::find($id);
+    if (!$menu) {
+      echo "could not update price because menu $id could not be found";
+    } else {
+      if (is_numeric($_POST['regular_price'])) {
+        $regular_price = $_POST['regular_price'];
+      }
+      if (is_numeric($_POST['double_price'])) {
+        $double_price = $_POST['double_price'];
+      }
+      $menu->regular_price = $regular_price;
+      $menu->double_price  = $double_price;
+      $menu->update();
+      redirect('menu_edit.php?id='.$menu->id);
+    }
     break;
 
   case 'item.update':

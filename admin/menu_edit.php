@@ -14,6 +14,19 @@ include("../header.php");
 
 <h1><a href="index.php">Admin</a> &#x27a4; Edit Menu</h1>
 
+<h2><?= strftime('%B %Y Lunch Menu', $menu->timestamp_for_day(2)) ?></h2>
+
+<form class="menu-price-editor" method="post" action="menu.php">
+  <input type="hidden" name="action" value="price.update" />
+  <input type="hidden" name="id" value="<?= $id ?>" />
+  Regular Price:
+  <input type="text" size="6" name="regular_price" value="<?= sprintf('%0.2f', $menu->regular_price) ?>" />
+  Double Price:
+  <input type="text" size="6" name="double_price" value="<?= sprintf('%0.2f', $menu->double_price) ?>" />
+  &nbsp;
+  <input type="submit" name="submit" value="Save" />
+</form>
+
 <form class="menu-editor">
 <input type="hidden" id="id" name="id" value="<?= $id ?>" />
 
