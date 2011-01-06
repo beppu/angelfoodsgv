@@ -106,20 +106,26 @@ if (count($errors)) {
   $purchase->status       = 'pending';
   $purchase->family_name  = $family_name;
   $purchase->phone_number = $phone_number;
-  $purchase->create();
-  foreach ($rows as $r) {
-    foreach ($r->orders as $d) {
-      $item = new PurchaseItem();
-      $item->day         = $d->day;
-      $item->child_name  = $r->name;
-      $item->child_grade = $r->grade;
-      $item->price       = $price[$d->order];
-      $purchase->add_item($item);
+  $success = $purchase->create();
+  if ($success) {
+    foreach ($rows as $r) {
+      error_log($r->name);
+      foreach ($r->orders as $d) {
+        $item = new PurchaseItem();
+        $item->day         = $d->day;
+        $item->child_name  = $r->name;
+        $item->child_grade = $r->grade;
+        $item->price       = $price[$d->order];
+        $purchase->add_item($item);
+        error_log("  ".$d->day);
+      }
     }
+    // TODO - redirect to paypal
+    header('Content-Type: text/plain');
+    var_dump($purchase);
+  } else {
+    echo "could not create purchase";
   }
-  // TODO - redirect to paypal
-  header('Content-Type: text/plain');
-  var_dump($purchase);
 }
 
 ?>

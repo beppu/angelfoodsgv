@@ -37,7 +37,7 @@ create table purchase (
   status enum('pending', 'cancelled', 'paid') not null default 'pending',
   created_on datetime,
   modified_on timestamp,
-  unique key (menu_id, session_id)
+  unique key (menu_id, session_id)  -- XXX might get rid of this constraint.... not sure....
 );
 
 create table purchase_item (
@@ -49,5 +49,4 @@ create table purchase_item (
   price decimal(8,2) not null,
   created_on datetime,
   modified_on timestamp,
-  unique key (purchase_id, day)
 );

@@ -29,10 +29,10 @@ include('../header.php');
   ?>
     <tr>
       <td id="menu-current-<?= $menu->id ?>" class="current"><?= $menu->is_current ? "*" : "&nbsp;" ?></td>
-      <td><a href="menu_edit.php?id=<?php echo $menu->id ?>"><?php echo sprintf('%02d/%d', $menu->month, $menu->year) ?></a></td>
-      <td class="numeric">0</td>
-      <td class="numeric">0</td>
-      <td class="numeric">$0.00</td>
+      <td><a href="menu_edit.php?id=<?php echo $menu->id ?>"><?= sprintf('%02d/%d', $menu->month, $menu->year) ?></a></td>
+      <td class="numeric"><?= $menu->purchases ?></td>
+      <td class="numeric"><?= $menu->meals ?></td>
+      <td class="numeric">$<?= $menu->income ?></td>
     </tr>
   <?php
   }

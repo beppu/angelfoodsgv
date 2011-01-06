@@ -53,7 +53,19 @@ class Menu {
    *
    */
   static function list_all() {
-    $rs = mysql_query("SELECT menu.*, (config.current_menu_id = menu.id) as is_current FROM menu, config WHERE config.id = 1 ORDER BY year DESC, month DESC;");
+    $rs = mysql_query("
+      SELECT menu.*,
+             count(distinct purchase.id) as purchases, 
+             count(purchase_item.id) as meals,
+             sum(purchase_item.price) as income,
+             (config.current_menu_id = menu.id) as is_current 
+        FROM config, menu 
+             LEFT JOIN purchase on menu.id = purchase.menu_id
+             LEFT JOIN purchase_item on purchase.id = purchase_item.purchase_id 
+       WHERE config.id = 1 
+       GROUP BY menu.id 
+       ORDER BY year DESC, month DESC
+    ");
     $menus = array();
     while ($menu = mysql_fetch_object($rs, 'Menu')) {
       array_push($menus, $menu);
