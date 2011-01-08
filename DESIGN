@@ -57,11 +57,14 @@ Technical Challenge?  Maybe
     https://cms.paypal.com/cms_content/US/en_US/files/developer/PP_ExpressCheckoutAPIUserGuide.pdf
     developer.paypal.com
       store
-        email: john.b_1289797684_biz@gmail.com
-        password: 289797632
+        email        : john.b_1289797684_biz@gmail.com
+        password     : 289797632
+        api username : john.b_1289797684_biz_api1.gmail.com
+        api password : 1289797699
+        signature    : A2qWVl9dGWgfFwOTAbs.1NJH1y.2A4NROeMMMzrHUsQEfRxly9viLvmz	
       customer
-        email: buyer_1289798020_per@gmail.com
-        password: 289797944
+        email        : buyer_1289798020_per@gmail.com
+        password     : 289797944
 
 
 

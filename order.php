@@ -111,7 +111,7 @@ if (count($errors)) {
     foreach ($rows as $r) {
       error_log($r->name);
       foreach ($r->orders as $d) {
-        $item = new PurchaseItem();
+        $item = new PurchaseItem(); // XXX - should add item.type enum (regular, double)
         $item->day         = $d->day;
         $item->child_name  = $r->name;
         $item->child_grade = $r->grade;

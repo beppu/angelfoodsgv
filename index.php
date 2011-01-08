@@ -59,6 +59,9 @@ $food_days = $menu->items('food');
 
   <form id="order" method="post" action="order.php">
     <input type="hidden" name="menu_id" value="<?= $menu->id ?>" />
+
+    <!-- The prices are here to support the JS that calculates the totals.  
+    order.php gets the prices from the database and not from these form values. -->
     <input type="hidden" id="regular_price" name="regular_price" value="<?= $menu->regular_price ?>" />
     <input type="hidden" id="double_price" name="double_price" value="<?= $menu->double_price ?>" />
 
@@ -131,7 +134,7 @@ $food_days = $menu->items('food');
         <a href="#buttons">Add Another Child</a>
       </div>
       <div class="purchase">
-        <input type="submit" name="submit" value="Purchase Lunches" />
+        <input type="image" name="submit" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
       </div>
       <div class="clear">&nbsp;</div>
     </div>

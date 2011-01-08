@@ -61,6 +61,7 @@ Released   : 20100423
 <hr />
 <?php
 if ($show_calendar) {
+  // XXX - make content inclusion more general
   include('cal.php');
 }
 ?>
