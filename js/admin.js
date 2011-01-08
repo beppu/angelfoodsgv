@@ -82,7 +82,7 @@
           $('table#menus td.current').each(function(i, td){
             $(td).html('');
           });
-          $(self).html('*');
+          $(self).html('&#x27a4;');
         });
       });
     }

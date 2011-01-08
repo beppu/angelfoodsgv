@@ -28,7 +28,7 @@ include('../header.php');
   foreach ($menus as $menu) {
   ?>
     <tr>
-      <td id="menu-current-<?= $menu->id ?>" class="current"><?= $menu->is_current ? "*" : "&nbsp;" ?></td>
+      <td id="menu-current-<?= $menu->id ?>" class="current"><?= $menu->is_current ? "&#x27A4;" : "&nbsp;" ?></td>
       <td><a href="menu_edit.php?id=<?php echo $menu->id ?>"><?= sprintf('%02d/%d', $menu->month, $menu->year) ?></a></td>
       <td class="numeric"><a href="purchases.php?menu_id=<?= $menu->id ?>"><?= $menu->purchases ?></a></td>
       <td class="numeric"><a href="meal_calendar.php?menu_id=<?= $menu->id ?>"><?= $menu->meals ?></a></td>
