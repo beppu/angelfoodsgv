@@ -45,7 +45,7 @@ class Purchase {
   /**
    * Add an item to the purchase
    *
-   * @param   PurchaseItem $item    the thing that is being bought
+   * @param   PurchaseItem  $item   the thing that is being bought
    * @return  boolean               Was the insert successful?
    */
   function add_item($item) {
@@ -54,6 +54,15 @@ class Purchase {
     ));
     $item->id = mysql_insert_id();
     return $rs;
+  }
+
+  /**
+   * Get items by type
+   * 
+   * @param   string  $type         type of meal (regular or double)
+   * @return  array                 an array of PurchaseItem objects.
+   */
+  function items($type=null) {
   }
 
   /**
@@ -88,10 +97,10 @@ class Purchase {
       $post_body = sprintf(
         'METHOD=%s&VERSION=%s&USER=%s&PWD=%s&SIGNATURE=%s%s',
         $api_method,
-        $config->paypal_api_version,
-        $config->paypal_api_user,
-        $config->paypal_api_password,
-        $config->paypal_api_signature,
+        urlencode($config->paypal_api_version),
+        urlencode($config->paypal_api_user),
+        urlencode($config->paypal_api_password),
+        urlencode($config->paypal_api_signature),
         $params_as_string
       );
 
@@ -115,8 +124,10 @@ class Purchase {
    *
    * @return  string                PayPal redirect url
    */
-  function paypal_checkout($options=null) {
-    $response = $this->paypal_post('SetExpressCheckout', array());
+  function paypal_set_express_checkout($options=null) {
+    $details = array();
+    $response = $this->paypal_post('SetExpressCheckout', $details);
+    error_log($response);
   }
 
   /**

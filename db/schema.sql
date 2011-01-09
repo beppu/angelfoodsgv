@@ -44,6 +44,7 @@ create table purchase_item (
   id int not null primary key auto_increment,
   purchase_id int not null,
   day int not null,
+  t enum('regular','double') not null default 'regular',
   child_name varchar(48) not null,
   child_grade int not null,
   price decimal(8,2) not null,
