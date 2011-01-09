@@ -55,9 +55,9 @@ class Menu {
   static function list_all() {
     $rs = mysql_query("
       SELECT menu.*,
-             count(distinct purchase.id)        AS purchases, 
-             count(purchase_item.id)            AS meals,
-             sum(purchase_item.price)           AS income,
+             (SELECT count(*) FROM purchase WHERE status = 'paid' AND menu_id = menu.id) AS purchases, 
+             if(purchase.status, sum(if(strcmp(purchase.status, 'paid'), 0, 1)), 0)      AS meals,
+             sum(if(strcmp(purchase.status, 'paid'), 0, purchase_item.price))            AS income,
              (config.current_menu_id = menu.id) AS is_current 
         FROM config, menu 
              LEFT JOIN purchase      ON menu.id     = purchase.menu_id
