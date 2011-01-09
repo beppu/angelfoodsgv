@@ -1,6 +1,8 @@
 <?php
 global $config;
 $config = new stdClass();
+$config->environment = "development";   # or "live"
+
 $config->db          = "angelfoodsgv";
 $config->db_host     = "localhost:3306";
 $config->db_user     = "root";

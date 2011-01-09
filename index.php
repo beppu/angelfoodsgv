@@ -141,6 +141,12 @@ $food_days = $menu->items('food');
   </form>
 </div>
 
+<!--
+
+the flow: index.php, order.php, paypal, review.php, confirm.php, receipt.php
+
+-->
+
 <?php
 include('footer.php');
 ?>

@@ -1,6 +1,5 @@
 <?php
 require_once('init.php');
-require_once('lib/purchase.php');
 
 function day_and_order($string) {
   $list     = explode('-', $string);
@@ -76,14 +75,17 @@ for ($i = 0; $i < $n; $i++) {
 $menu = Menu::find($menu_id);
 if (is_blank($family_name)) {
   $error = new stdClass();
+  $error->description = "Blank family name";
   array_push($errors, error);
 }
 if (is_blank($phone_number)) {
   $error = new stdClass();
+  $error->description = "Blank phone number";
   array_push($errors, error);
 }
 if (!$menu) {
   $error = new stdClass();
+  $error->description = "No menu";
   array_push($errors, error);
 }
 
@@ -98,7 +100,8 @@ $price = array(
 if (count($errors)) {
   header('Content-Type: text/plain');
   var_dump($_POST);
-  #redirect('index.php');
+  var_dump($errors);
+  // redirect('index.php');
 } else {
   $purchase = new Purchase();
   $purchase->menu_id      = $menu_id;
@@ -111,8 +114,9 @@ if (count($errors)) {
     foreach ($rows as $r) {
       error_log($r->name);
       foreach ($r->orders as $d) {
-        $item = new PurchaseItem(); // XXX - should add item.type enum (regular, double)
+        $item = new PurchaseItem();
         $item->day         = $d->day;
+        $item->t           = $d->order;
         $item->child_name  = $r->name;
         $item->child_grade = $r->grade;
         $item->price       = $price[$d->order];
@@ -120,9 +124,18 @@ if (count($errors)) {
         error_log("  ".$d->day);
       }
     }
-    // TODO - redirect to paypal
-    header('Content-Type: text/plain');
-    var_dump($purchase);
+    // redirect to paypal
+    $paypal_url = $purchase->paypal_set_express_checkout();
+    if ($paypal_url) {
+      redirect($paypal_url);
+    } else {
+      error_log("PayPal didn't like our SetExpressCheckout request.");
+      redirect('error.php');
+    }
+
+    // DEBUG
+    // header('Content-Type: text/plain');
+    // var_dump($purchase);
   } else {
     echo "could not create purchase";
   }

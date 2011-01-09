@@ -2,13 +2,13 @@
 require_once('init.php');
 
 $is_admin = false;
-$title = "About";
+$title = "Error";
 include('header.php');
 ?>
 
-TO DO: add info about angelfoodsgv...
-<?= $config->paypal_api_redirect_url ?>
+An error occurred.  :(
 
 <?php
 include('footer.php');
 ?>
+

@@ -3,6 +3,7 @@ require_once('configuration.php');
 require_once('lib/helpers.php');
 require_once('lib/db.php');
 require_once('lib/menu.php');
+require_once('lib/purchase.php');
 date_default_timezone_set('America/Los_Angeles');
 db();
 session_start();

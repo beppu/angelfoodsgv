@@ -17,12 +17,24 @@ class Purchase {
    * Retrieve a purchase from the database by id.
    *
    * @param   integer $id   the purchase id
-   * @return  Menu          a Menu object
+   * @return  Purchase      a Purchase object
    */
   static function find($id) {
     $rs = mysql_query(sprintf("SELECT * FROM purchase WHERE id = %d", q($id)));
-    $menu = mysql_fetch_object($rs, 'Menu');
-    return $menu;
+    $purchase = mysql_fetch_object($rs, 'Purchase');
+    return $purchase;
+  }
+
+  /**
+   * Retrieve a purchase from the database by receipt_id.
+   *
+   * @param   string  $id   the receipt_id of this purchase
+   * @return  Purchase      a Purchase object
+   */
+  static function find_by_receipt_id($receipt_id) {
+    $rs = mysql_query(sprintf("SELECT * FROM purchase WHERE receipt_id = '%s'", q($receipt_id)));
+    $purchase = mysql_fetch_object($rs, 'Purchase');
+    return $purchase;
   }
 
   /**
@@ -36,11 +48,41 @@ class Purchase {
     ));
     if ($rs) {
       $this->id = mysql_insert_id();
-      $rs2 = mysql_query(sprintf("UPDATE purchase SET receipt_id = '%s'", sha1($this->id)));
+      $receipt_id = sha1($this->id);
+      $rs2 = mysql_query(sprintf("UPDATE purchase SET receipt_id = '%s' WHERE id = %d", q($receipt_id), q($this->id)));
+      if ($rs2) {
+        $this->receipt_id = $receipt_id;
+      }
+      return $rs2;
     }
     return $rs;
   }
 
+  /**
+   * Cancel this order.
+   *
+   * @return  boolean       Was the update successful?
+   */
+  function cancel() {
+    $rs = mysql_query(sprintf("UPDATE purchase SET status = 'cancelled' WHERE id = %d", q($this->id)));
+    if ($rs) {
+      $this->status = 'cancelled';
+    }
+    return $rs;
+  }
+
+  /**
+   * Note that this purchase has been paid for.
+   *
+   * @return  boolean       Was the update successful?
+   */
+  function paid() {
+    $rs = mysql_query(sprintf("UPDATE purchase SET status = 'paid' WHERE id = %d", q($this->id)));
+    if ($rs) {
+      $this->status = 'paid';
+    }
+    return $rs;
+  }
 
   /**
    * Add an item to the purchase
@@ -49,8 +91,8 @@ class Purchase {
    * @return  boolean               Was the insert successful?
    */
   function add_item($item) {
-    $rs = mysql_query(sprintf("INSERT INTO purchase_item (purchase_id, day, child_name, child_grade, price, created_on) VALUES (%d, %d, '%s', %d, %0.2f, '%s')",
-      q($this->id), q($item->day), q($item->child_name), q($item->child_grade), $item->price, now()
+    $rs = mysql_query(sprintf("INSERT INTO purchase_item (purchase_id, day, t, child_name, child_grade, price, created_on) VALUES (%d, %d, '%s', '%s', %d, %0.2f, '%s')",
+      q($this->id), q($item->day), q($item->t), q($item->child_name), q($item->child_grade), $item->price, now()
     ));
     $item->id = mysql_insert_id();
     return $rs;
@@ -66,12 +108,27 @@ class Purchase {
   }
 
   /**
+   * Total amount of this purchase
+   * 
+   * @return  float                 dollar amount of this purchase
+   */
+  function amount() {
+    $rs = mysql_query(sprintf("SELECT sum(price) as usd FROM purchase_item WHERE purchase_id = %d", q($this->id)));
+    if ($rs) {
+      $amount = mysql_fetch_object($rs);
+      return $amount->usd;
+    } else {
+      return $rs;
+    }
+  }
+
+  /**
    * Send a POST request to PayPal
    *
    * @param   string  $api_method   Name of PayPal API method
    * @param   array   $params       POST parameters
    * @param   array   $headers      HTTP headers
-   * @return  string                PayPal API response
+   * @return  array                 PayPal API response as key/value pairs
    */
   function paypal_post($api_method, $params="", $headers=null) {
     global $config;
@@ -111,7 +168,19 @@ class Purchase {
         error_log("$api_method failed: ".curl_error($ch).'('.curl_errno($ch).')');
         return false;
       } else {
-        return $response;
+        $r = array();
+        $kv_list = explode("&", $response);
+        foreach ($kv_list as $kv) {
+          $pair = explode("=", $kv);
+          if (count($pair) > 1) {
+            $r[$pair[0]] = $pair[1];
+          }
+        }
+        if((0 == sizeof($r)) || !array_key_exists('ACK', $r)) {
+          error_log("Invalid HTTP Response for POST request($post_body)");
+          return false;
+        }
+        return $r;
       }
     } else {
       error_log("$api_method failed: ".curl_error($ch).'('.curl_errno($ch).')');
@@ -125,9 +194,82 @@ class Purchase {
    * @return  string                PayPal redirect url
    */
   function paypal_set_express_checkout($options=null) {
-    $details = array();
+    global $config;
+    $amount  = $this->amount();
+    $details = array(
+      "PAYMENTACTION"     => "Sale",
+      "RETURNURL"         => sprintf("http://%s/review.php?r=%s", $_SERVER['HTTP_HOST'], urlencode($this->receipt_id)),
+      "CANCELURL"         => sprintf("http://%s/cancel.php?r=%s", $_SERVER['HTTP_HOST'], urlencode($this->receipt_id)),
+      "ITEMAMT"           => $amount,
+      "TAXAMT"            => 0.00,
+      "SHIPPINGAMT"       => 0.00,
+      "HANDLINGAMT"       => 0.00,
+      "NOSHIPPING"        => 1,
+      "ALLOWNOTE"         => 0,
+      "GIFTMESSAGEENABLE" => 0,
+      "AMT"               => $amount,
+    );
+    $menu = Menu::find($this->menu_id);
+    if (!$menu) {
+      error_log("Menu not found");
+      return false;
+    }
+    $rs = mysql_query(sprintf("
+      SELECT purchase_id, child_name, child_grade, t,
+             SUM(price) AS price,
+             COUNT(t)   AS quantity
+        FROM purchase_item 
+       WHERE purchase_id = %d
+       GROUP BY purchase_id, child_name, child_grade, t 
+       ORDER BY child_name, child_grade, t",
+      q($this->id)
+    ));
+    $i = 0;
+    while ($s = mysql_fetch_object($rs)) {
+      $details["L_NAME$i"] = sprintf("%s Grade %s - %s Meals", $s->child_name, $s->child_grade, ucfirst($s->t));
+      $details["L_AMT$i"]  = ($s->t == "regular") ? $menu->regular_price : $menu->double_price;
+      $details["L_QTY$i"]  = $s->quantity;
+      $i++;
+    }
+    error_log(var_export($details, true));
     $response = $this->paypal_post('SetExpressCheckout', $details);
-    error_log($response);
+    if("SUCCESS" == strtoupper($response["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($response["ACK"])) {
+      $token = urldecode($response["TOKEN"]);
+      $paypal_url = sprintf($config->paypal_api_redirect_url, $token);
+      error_log("TOKEN    : $token");
+      error_log("REDIRECT : $paypal_url");
+      return $paypal_url;
+    } else {
+      error_log("ERROR: " . var_export($response, true));
+      return false;
+    }
+  }
+
+  /**
+   * Finalize the purchase
+   *
+   * @return ?
+   */
+  function paypal_do_express_checkout($token, $payer_id) {
+    global $config;
+    $amount  = $this->amount();
+    $details = array(
+      "TOKEN"         => $token,
+      "PAYERID"       => $payer_id,
+      "PAYMENTACTION" => "Sale",
+      "AMT"           => $amount,
+    );
+    error_log("DETAILS: " . var_export($details, true));
+    $response = $this->paypal_post('DoExpressCheckoutPayment', $details);
+    if("SUCCESS" == strtoupper($response["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($response["ACK"])) {
+      // now what?
+      error_log("SUCCESS: " . var_export($response, true));
+      $this->paid();
+      return true;
+    } else {
+      error_log("ERROR: " . var_export($response, true));
+      return false;
+    }
   }
 
   /**
@@ -136,6 +278,7 @@ class Purchase {
    * @return ?
    */
   function paypal_refund($options=null) {
+    global $config;
     // TODO
   }
 }
