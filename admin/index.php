@@ -18,7 +18,7 @@ include('../header.php');
     <tr>
       <th width="10px">*</th>
       <th>Menu</th>
-      <th class="numeric" width="15%"># of Orders</th>
+      <th class="numeric" width="15%"># of Purchases</th>
       <th class="numeric" width="15%"># of Meals</th>
       <th class="numeric" width="15%">Income</th>
     </tr>
