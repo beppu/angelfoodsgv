@@ -221,5 +221,21 @@ class Menu {
     return $rs;
   }
 
+  /**
+   * Get a list of purchases for this menu
+   */
+  function purchases($status='paid') {
+    $rs = mysql_query(sprintf(
+      "SELECT * FROM purchase WHERE menu_id = %d AND status = '%s' ORDER BY created_on DESC",
+      q($this->id),
+      q($status)
+    ));
+    $purchases = array();
+    while ($purchase = mysql_fetch_object($rs, 'Purchase')) {
+      array_push($purchases, $purchase);
+    }
+    return $purchases;
+  }
+
 }
 ?>
