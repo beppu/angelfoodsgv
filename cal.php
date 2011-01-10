@@ -8,7 +8,7 @@ function weeks($menu, $items) {
     "Friday"    => 4
   );
   $weeks = array();
-  $week = array();
+  $week  = array();
   foreach ($items as $i) {
     $dow = date('l', $menu->timestamp_for_day($i->day));
     $index = $index_dow[$dow];
@@ -28,10 +28,10 @@ function weeks($menu, $items) {
   return $weeks;
 }
 
-$menu = Menu::current();
+$menu  = Menu::current();
 $weeks = weeks($menu, $menu->items());
 ?>
-<div id="calendar-section">
+<div id="calendar-section" class="top-section">
   <h1><?= strftime('%B %Y Lunch Menu', $menu->timestamp_for_day(2)) ?></h1>
   <table id="calendar" width="100%">
     <thead>

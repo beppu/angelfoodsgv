@@ -1,12 +1,13 @@
 <?php
 require_once('init.php');
 
-$is_admin = false;
-$title = "Contact";
+$title       = "Contact";
+$is_admin    = false;
+$top_section = 'contact_content.php';
 include('header.php');
 ?>
 
-TO DO: add contact info...
+
 
 <?php
 include('footer.php');

@@ -3,10 +3,14 @@ td.numeric {
   text-align: right;
 }
 
-#calendar-section {
+div.top-section {
   width: 940px;
   background: #FFFFFF;
   margin: 0 auto;
+}
+
+div.informational {
+  padding: 2em;
 }
 
 #calendar-section h1 {

@@ -1,13 +1,13 @@
 <?php
 require_once('init.php');
 
-$is_admin = false;
-$title = "About";
+$title       = "About";
+$is_admin    = false;
+$top_section = 'about_content.php';
 include('header.php');
 ?>
 
-TO DO: add info about angelfoodsgv...
-<?= $config->paypal_api_redirect_url ?>
+
 
 <?php
 include('footer.php');
