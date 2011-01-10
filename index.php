@@ -2,7 +2,7 @@
 require_once('init.php');
 
 $title = "Angel Foods";
-$show_calendar = true;
+$top_section = 'cal.php';
 include('header.php');
 ?>
 

@@ -60,9 +60,8 @@ Released   : 20100423
 <!-- end #header -->
 <hr />
 <?php
-if ($show_calendar) {
-  // XXX - make content inclusion more general
-  include('cal.php');
+if ($top_section) {
+  include($top_section);
 }
 ?>
 <div id="page">

@@ -248,7 +248,7 @@ class Purchase {
   /**
    * Finalize the purchase
    *
-   * @return ?
+   * @return boolean      Was the purchase successful?
    */
   function paypal_do_express_checkout($token, $payer_id) {
     global $config;

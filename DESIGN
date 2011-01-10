@@ -46,8 +46,8 @@ Data Model
   Menu (monthly menu container)
   MenuItem (item in menu)
     type: [ Food | Dismissal | Holiday ]
-  Order (order container)
-  OrderItem (person + food + price)
+  Purchase (purchase container)
+  PurchaseItem (person + food + price)
 
 Technical Challenge?  Maybe
   How many days in a month?
