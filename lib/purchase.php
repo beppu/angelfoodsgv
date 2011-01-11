@@ -99,12 +99,40 @@ class Purchase {
   }
 
   /**
-   * Get items by type
+   * Get items
    * 
-   * @param   string  $type         type of meal (regular or double)
    * @return  array                 an array of PurchaseItem objects.
    */
-  function items($type=null) {
+  function items() {
+    $rs = mysql_query(sprintf(
+      "SELECT * FROM purchase_item WHERE purchase_id = %d ORDER BY child_grade, child_name, day",    
+      q($this->id)
+    ));
+    $items = array();
+    while ($item = mysql_fetch_object($rs, 'PurchaseItem')) {
+      array_push($items, $item);
+    }
+    return $items;
+  }
+
+  /**
+   * Get items organized by child.
+   *
+   * @return  array                 an array of array of PurchaseItem objects keyed by child_name
+   */
+  function items_by_child() {
+    $items = $this->items();
+    if (!$items) return false;
+
+    $items_by_child = array();
+    foreach ($items as $i) {
+      $key = sprintf('%s Grade %s', $i->child_name, $i->child_grade);
+      if (!array_key_exists($key, $items_by_child)) {
+        $items_by_child[$key] = array();
+      }
+      array_push($items_by_child[$key], $i);
+    }
+    return $items_by_child;
   }
 
   /**
