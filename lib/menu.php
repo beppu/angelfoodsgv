@@ -167,9 +167,32 @@ class Menu {
   function items($t=null) {
     $query = "";
     if ($t) {
-      $query = sprintf("SELECT * FROM menu_item WHERE menu_id = %d AND t = '%s' ORDER by day", q($this->id), q($t));
+      $query = sprintf("
+        SELECT mi.*,  
+               (SELECT count(pi.id) 
+                  FROM purchase_item pi 
+                       JOIN purchase p ON p.id = pi.purchase_id 
+                 WHERE pi.day = mi.day 
+                   AND p.menu_id = mi.menu_id
+                   AND p.status = 'paid') as orders
+          FROM menu_item mi 
+         WHERE menu_id = %d AND mi.t = '%s' 
+         ORDER BY mi.day",
+        q($this->id), 
+        q($t)
+      );
     } else {
-      $query = sprintf("SELECT * FROM menu_item WHERE menu_id = %d ORDER by day", q($this->id));
+      $query = sprintf("
+        SELECT mi.*,  
+               (SELECT count(pi.id) 
+                  FROM purchase_item pi 
+                       JOIN purchase p ON p.id = pi.purchase_id 
+                 WHERE pi.day = mi.day AND p.menu_id = mi.menu_id) as orders
+          FROM menu_item mi 
+         WHERE menu_id = %d
+         ORDER BY mi.day",
+        q($this->id)
+      );
     }
     $rs = mysql_query($query);
     $items = array();
