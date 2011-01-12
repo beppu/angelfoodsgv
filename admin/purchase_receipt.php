@@ -36,10 +36,12 @@ $last_name   = ucfirst($purchase->family_name);
   <?php
   foreach ($children as $key => $items) {
     $info = explode('|', $key);
-    $child_name = $info[0];
-    $child_grade = sprintf('Grade %d', $info[1]);
+    $child_name  = $info[0];
+    $child_grade = "";
     if ($info[1] == 0) {
       $child_grade = "Kindergarten";
+    } else {
+      $child_grade = sprintf('Grade %d', $info[1]);
     }
   ?>
     <tr>
