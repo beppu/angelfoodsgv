@@ -131,6 +131,7 @@ class Menu {
     return $rs;
   }
 
+
   /**
    *
    */
@@ -141,7 +142,7 @@ class Menu {
   /**
    * The weekdays of this month
    *
-   * @return array [ { "day": n, "dow": dayOfWeek }, ... ]
+   * @return array    [ { "day": n, "dow": dayOfWeek }, ... ]
    */
   function weekdays() {
     $weekdays = array();

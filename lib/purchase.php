@@ -59,6 +59,15 @@ class Purchase {
   }
 
   /**
+   * Return the Menu object associated with this purchase.
+   *
+   * @return Menu     Menu object for this purchase
+   */
+  function menu() {
+    return Menu::find($this->menu_id);
+  }
+  
+  /**
    * Cancel this order.
    *
    * @return  boolean       Was the update successful?
@@ -104,8 +113,15 @@ class Purchase {
    * @return  array                 an array of PurchaseItem objects.
    */
   function items() {
-    $rs = mysql_query(sprintf(
-      "SELECT * FROM purchase_item WHERE purchase_id = %d ORDER BY child_grade, child_name, day",    
+    $rs = mysql_query(sprintf("
+      SELECT pi.*,
+             mi.title 
+        FROM purchase_item pi 
+             JOIN purchase p   ON pi.purchase_id = p.id 
+             JOIN menu m       ON p.menu_id = m.id 
+             JOIN menu_item mi ON (m.id = mi.menu_id AND pi.day = mi.day) 
+       WHERE purchase_id = %d 
+       ORDER BY pi.id",
       q($this->id)
     ));
     $items = array();
@@ -126,7 +142,7 @@ class Purchase {
 
     $items_by_child = array();
     foreach ($items as $i) {
-      $key = sprintf('%s Grade %s', $i->child_name, $i->child_grade);
+      $key = sprintf('%s|%s', $i->child_name, $i->child_grade);
       if (!array_key_exists($key, $items_by_child)) {
         $items_by_child[$key] = array();
       }
@@ -320,8 +336,8 @@ class PurchaseItem {
   public $day;
   public $child_name;
   public $child_grade;
-  public $item_name;
-  public $item_price;
+  public $t;
+  public $title;
 
 }
 
