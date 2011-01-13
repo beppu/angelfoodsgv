@@ -23,6 +23,7 @@ Released   : 20100423
 <script type="text/javascript" src="/js/admin.js"></script>
 <link href="/css/admin.css" rel="stylesheet" type="text/css" media="screen" />
 <?php } ?>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/css/main.css" rel="stylesheet" type="text/css" media="screen" />
 <style type="text/css">

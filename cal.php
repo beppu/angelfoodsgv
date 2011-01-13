@@ -59,11 +59,11 @@ $weeks = weeks($menu, $menu->items());
         ?>
         <td class="<?= $item->t ?>">
           <h4><?= $item->day ?></h4>
-          <h5><?= $item->title ?></h5>
+          <h5><?= htmlentities($item->title) ?></h5>
           <ul>
-            <li><?= $extra[0] ?></li>
-            <li><?= $extra[1] ?></li>
-            <li><?= $extra[2] ?></li>
+            <li><?= htmlentities($extra[0]) ?></li>
+            <li><?= htmlentities($extra[1]) ?></li>
+            <li><?= htmlentities($extra[2]) ?></li>
           </ul>
         </td>
         <?php

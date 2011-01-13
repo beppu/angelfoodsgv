@@ -36,6 +36,8 @@ $food_days = $menu->items('food');
               <option>4</option>
               <option>5</option>
               <option>6</option>
+              <option>7</option>
+              <option>8</option>
             </select>
           </td>
           <td>
@@ -103,6 +105,8 @@ $food_days = $menu->items('food');
               <option>4</option>
               <option>5</option>
               <option>6</option>
+              <option>7</option>
+              <option>8</option>
             </select>
           </td>
 

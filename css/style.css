@@ -194,7 +194,7 @@ hr { display: none; }
 
 #logo {
   width: 920px;
-  height: 45px;
+  height: 75px;
   margin: 0 auto;
   padding-top: 5px;
   padding-left: 20px;
@@ -204,7 +204,7 @@ hr { display: none; }
   float: left;
   margin: 0px;
   line-height: normal;
-  text-transform: lowercase;
+  /* text-transform: lowercase; */
   font-weight: normal;
   color: #FFFFFF;
 }
@@ -219,7 +219,9 @@ hr { display: none; }
 
 #logo h1 {
   letter-spacing: -1px;
-  font-size: 30px;
+  font-family: 'Tangerine', serif;
+  font-size: 60px;
+  text-shadow: 2px 2px 2px #aaa;
 }
 
 #logo a {
