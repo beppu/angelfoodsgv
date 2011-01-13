@@ -17,7 +17,7 @@ Released   : 20100423
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="/js/jquery.slidertron-0.1.js"></script>
+<script type="text/javascript" src="/js/jquery.gritter.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
 <?php if ($is_admin) { ?>
 <script type="text/javascript" src="/js/admin.js"></script>
@@ -26,6 +26,7 @@ Released   : 20100423
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/css/main.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="/css/jquery.gritter.css" rel="stylesheet" type="text/css" media="screen" />
 <style type="text/css">
 @import "/css/slidertron.css";
 @import "/css/mediagroove.css";
