@@ -95,6 +95,26 @@ div.informational {
   float: right;
 }
 
+#confirm {
+  padding: 1em 0;
+  text-align: right;
+}
+
+#confirm input {
+  font-size: 2em;
+}
+
+dl.receipt dt {
+  font-weight: bold;
+  color: #EDEF0E;
+}
+
+dl.receipt dd {
+  margin: 0;
+  padding-bottom: 0.5em;
+  color: #F0F0F0;
+}
+
 ul.picker {
   display: inline;
   padding: 0;

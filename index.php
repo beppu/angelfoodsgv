@@ -67,10 +67,10 @@ $food_days = $menu->items('food');
 
     <div class="family-info">
       <h4>Family Name</h4>
-      <input type="text" name="family_name" size="30" />
+      <input type="text" id="family-name" name="family_name" size="30" />
 
       <h4>Phone Number</h4>
-      <input type="text" name="phone_number" size="30" />
+      <input type="text" id="phone-number" name="phone_number" size="30" />
     </div>
 
     <table class="mediagroove" cellspacing="0" cellpadding="0" width="100%">

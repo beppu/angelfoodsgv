@@ -16,11 +16,15 @@ $last_name   = ucfirst($purchase->family_name);
 
 <h2><?= strftime("%B %Y: $last_name Family Lunch Orders", $menu->timestamp_for_day(2)) ?></h2>
 
-<dl>
-<dt>Phone Number</dt>
-<dd><?= $purchase->phone_number ?></dd>
-<dt>Purchase Date</dt>
-<dd><?= $purchase->created_on ?></dd>
+<dl class="receipt">
+  <dt>Family Name</dt>
+  <dd><?= $purchase->family_name ?></dd>
+  <dt>Phone Number</dt>
+  <dd><?= $purchase->phone_number ?></dd>
+  <dt>Purchase Date</dt>
+  <dd><?= $purchase->created_on ?></dd>
+  <dt>Receipt ID</dt>
+  <dd><?= $purchase->receipt_id ?></dd>
 </dl>
 
 <table class="mediagroove" cellpadding="0" cellspacing="0" width="100%">
