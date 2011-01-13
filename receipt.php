@@ -15,7 +15,7 @@ $children  = $purchase->items_by_child();
 $last_name = ucfirst($purchase->family_name);
 ?>
 
-<h1>Receipt</h1>
+<h1><?= strftime("Receipt for %B %Y Lunch Menu", $menu->timestamp_for_day(2)) ?></h1>
 
 <dl class="receipt">
   <dt>Family Name</dt>
