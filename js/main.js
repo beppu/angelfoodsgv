@@ -116,9 +116,9 @@
       // a row that has only 1 or 2 (of 3) fields filled in;
       // completely empty and completely full are the only ones allowed.
       var incompleteRow = function(tr) {
-        var childName = tr.find('input:eq(0)');
-        var grade = tr.find('select:eq(0)');
-        var order = tr.find('input:eq(1)');
+        var childName = tr.find('input.name');
+        var grade = tr.find('select');
+        var order = tr.find('input.order');
         var x = [];
         if (childName.val().match(/^\s*$/)) {
           x.push("Child's Name");
@@ -129,8 +129,11 @@
         if (order.val().match(/^\s*$/)) {
           x.push('Order');
         }
-        if (x.length == 0 || x.length == 3) {
+        if (x.length == 0) {
           return false;
+        }
+        if (x.length == 3) {
+          return true;
         } else {
           return x;
         }
@@ -138,34 +141,36 @@
 
       // validate each row
       var emptyRowCount = 0;
-      $('#order table tbody tr').each(function(i,el){
+      $('#order table.mediagroove tbody tr').each(function(i,el){
         var tr = $(el);
         var x;
         if (x = incompleteRow(tr)) {
-          errors.push({
-            title  : 'Error:  Row ' + (i+1),
-            text   : 'Missing ' + x.join(' and '),
-            action : function(){
-              for (var j = 0; j < x.length; j++) {
-                if (x[j] == "Child's Name") {
-                  tr.find('td:eq(1)').addClass('error');
-                }
-                if (x[j] == "Grade") {
-                  tr.find('td:eq(2)').addClass('error');
-                }
-                if (x[j] == "Order") {
-                  tr.find('td:eq(3)').addClass('error');
+          if (typeof x == "boolean") {
+            emptyRowCount++;
+          } else {
+            errors.push({
+              title  : 'Error:  Row ' + (i+1),
+              text   : 'Missing ' + x.join(' and '),
+              action : function(){
+                for (var j = 0; j < x.length; j++) {
+                  if (x[j] == "Child's Name") {
+                    tr.find('td:eq(1)').addClass('error');
+                  }
+                  if (x[j] == "Grade") {
+                    tr.find('td:eq(2)').addClass('error');
+                  }
+                  if (x[j] == "Order") {
+                    tr.find('td:eq(3)').addClass('error');
+                  }
                 }
               }
-            }
-          });
-        } else {
-          emptyRowCount++;
+            });
+          }
         }
       });
 
       // are all rows empty?
-      if (emptyRowCount == $('#order table tbody tr').length) {
+      if (emptyRowCount == $('#order table.mediagroove tbody tr').length) {
         errors.push({
           title : 'Error',
           text  : 'All rows are empty!'

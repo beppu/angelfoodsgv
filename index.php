@@ -24,7 +24,7 @@ $food_days = $menu->items('food');
         <tr>
           <td class="closer">X</td>
           <td>
-            <input type="text" name="name[]" value="" />
+            <input type="text" class="name" name="name[]" value="" />
           </td>
           <td>
             <select name="grade[]">
@@ -47,7 +47,7 @@ $food_days = $menu->items('food');
             <?php } ?>
             </ul>
             <span class="all">all</span>
-            <input type="hidden" name="order[]" />
+            <input type="hidden" class="order" name="order[]" />
           </td>
           <td class="numeric total">$0.00</td>
         </tr>
@@ -92,7 +92,7 @@ $food_days = $menu->items('food');
         <tr>
           <td class="closer">X</td>
           <td>
-            <input type="text" name="name[]" value="<?= $child ?>" />
+            <input type="text" class="name" name="name[]" value="<?= $child ?>" />
           </td>
 
           <td>
@@ -117,7 +117,7 @@ $food_days = $menu->items('food');
             <?php } ?>
             </ul>
             <span class="all">all</span>
-            <input type="hidden" name="order[]" />
+            <input type="hidden" class="order" name="order[]" />
           </td>
 
           <td class="numeric total">$0.00</td>
@@ -143,6 +143,24 @@ $food_days = $menu->items('food');
       <div class="clear">&nbsp;</div>
     </div>
   </form>
+
+  <div class="info">
+    <table cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td width="120">Lunch</td>
+          <td class="numeric">$<?= $menu->regular_price ?></td>
+          <td><ul class="picker"><li class="regular">&nbsp;1</li></ul> Click Box Once</td>
+        </tr>
+        <tr>
+          <td>Double Entrée</td>
+          <td class="numeric">+$<?= sprintf('%0.2f', $menu->double_price - $menu->regular_price) ?></td>
+          <td><ul class="picker"><li class="double">&nbsp;2</li></ul> Click Box One More Time</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
 <!--

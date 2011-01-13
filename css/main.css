@@ -95,6 +95,20 @@ div.informational {
   float: right;
 }
 
+div.info {
+  padding-top: 1em;
+}
+
+div.info table {
+  background: #FFFFFF;
+}
+
+div.info table td {
+  padding: 0.5em;
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+}
+
 #confirm {
   padding: 1em 0;
   text-align: right;
