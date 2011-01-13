@@ -104,6 +104,10 @@ div.informational {
   font-size: 2em;
 }
 
+.error {
+  background: #FFCCEE;
+}
+
 dl.receipt dt {
   font-weight: bold;
   color: #EDEF0E;

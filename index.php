@@ -81,7 +81,7 @@ $food_days = $menu->items('food');
           <th width="20px">X</th>
           <th width="20%">Child's Name</th>
           <th width="30px">Grade</th>
-          <th>Food</th>
+          <th>Food (click on the days) </th>
           <th width="60px">Price</th>
         </tr>
       </thead>

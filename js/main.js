@@ -89,20 +89,99 @@
     // validate
     $('#order').submit(function(ev){
       var errors = [];
+
+      // reset
+      $('#family-name').removeClass('error');
+      $('#phone-number').removeClass('error');
+      $('#order tbody td').removeClass('error');
+
+      // validate family_name
       if ($('#family-name').val().match(/^\s*$/)) {
         errors.push({
-          message: 'Please fill in your Family Name.',
-          action: 'gritter'
+          title  : 'Error:  Family Name',
+          text   : 'Please fill in your Family Name.',
+          action : function(){ $('#family-name').addClass('error') }
         });
       }
+
+      // validate phone_number
       if ($('#phone-number').val().match(/^\s*$/)) {
         errors.push({
-          message: 'Please fill in your Family Name.',
-          action: 'gritter'
+          title  : 'Error:  Phone Number',
+          text   : 'Please fill in your Phone Number.',
+          action : function(){ $('#phone-number').addClass('error') }
         });
       }
+
+      // a row that has only 1 or 2 (of 3) fields filled in;
+      // completely empty and completely full are the only ones allowed.
+      var incompleteRow = function(tr) {
+        var childName = tr.find('input:eq(0)');
+        var grade = tr.find('select:eq(0)');
+        var order = tr.find('input:eq(1)');
+        var x = [];
+        if (childName.val().match(/^\s*$/)) {
+          x.push("Child's Name");
+        }
+        if (grade.val() == '-') {
+          x.push('Grade');
+        }
+        if (order.val().match(/^\s*$/)) {
+          x.push('Order');
+        }
+        if (x.length == 0 || x.length == 3) {
+          return false;
+        } else {
+          return x;
+        }
+      };
+
+      // validate each row
+      var emptyRowCount = 0;
+      $('#order table tbody tr').each(function(i,el){
+        var tr = $(el);
+        var x;
+        if (x = incompleteRow(tr)) {
+          errors.push({
+            title  : 'Error:  Row ' + (i+1),
+            text   : 'Missing ' + x.join(' and '),
+            action : function(){
+              for (var j = 0; j < x.length; j++) {
+                if (x[j] == "Child's Name") {
+                  tr.find('td:eq(1)').addClass('error');
+                }
+                if (x[j] == "Grade") {
+                  tr.find('td:eq(2)').addClass('error');
+                }
+                if (x[j] == "Order") {
+                  tr.find('td:eq(3)').addClass('error');
+                }
+              }
+            }
+          });
+        } else {
+          emptyRowCount++;
+        }
+      });
+
+      // are all rows empty?
+      if (emptyRowCount == $('#order table tbody tr').length) {
+        errors.push({
+          title : 'Error',
+          text  : 'All rows are empty!'
+        });
+      }
+
       if (errors.length) {
-        console.log(errors);
+        for (var i = 0; i < errors.length; i++) {
+          $.gritter.add({
+            title : errors[i].title,
+            text  : errors[i].text
+          });
+          if (errors[i].action) {
+            errors[i].action.call()
+          }
+        }
         return false;
       } else {
         return true;
