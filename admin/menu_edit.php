@@ -64,7 +64,7 @@ include("../header.php");
         </select>
       </td>
       <td class="title">
-        <input size="16" type="text" name="title" value="<?= $item->title ?>"<?= $item->t == 'dismissal' ? ' disabled="disabled"' : '' ?>/>
+        <input size="16" maxlength="32" type="text" name="title" value="<?= $item->title ?>"<?= $item->t == 'dismissal' ? ' disabled="disabled"' : '' ?>/>
         <span class="saving"></span>
       </td>
       <td class="extra">
