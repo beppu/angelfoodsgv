@@ -28,6 +28,9 @@
 .mediagroove tbody tr.odd {
   background: #FFF8E8 url(/images/bg_td2.jpg) repeat-x;
 }
+.mediagroove tbody th {
+  background: #DFDFDF;
+}
 .mediagroove tbody th,
 .mediagroove td {
   font-size: 1.0em;

@@ -187,7 +187,9 @@ class Menu {
                (SELECT count(pi.id) 
                   FROM purchase_item pi 
                        JOIN purchase p ON p.id = pi.purchase_id 
-                 WHERE pi.day = mi.day AND p.menu_id = mi.menu_id) as orders
+                 WHERE pi.day = mi.day 
+                   AND p.menu_id = mi.menu_id
+                   AND p.status = 'paid') as orders
           FROM menu_item mi 
          WHERE menu_id = %d
          ORDER BY mi.day",
@@ -196,7 +198,7 @@ class Menu {
     }
     $rs = mysql_query($query);
     $items = array();
-    while ($item = mysql_fetch_object($rs)) {
+    while ($item = mysql_fetch_object($rs, 'MenuItem')) {
       array_push($items, $item);
     }
     return $items;
@@ -207,7 +209,7 @@ class Menu {
    */
   function find_item_for_day($day) {
     $rs = mysql_query(sprintf("SELECT * FROM menu_item WHERE menu_id = %d AND day = %d", q($this->id), q($day)));
-    $item = mysql_fetch_object($rs);
+    $item = mysql_fetch_object($rs, 'MenuItem');
     return $item;
   }
 
@@ -262,4 +264,59 @@ class Menu {
   }
 
 }
+
+/**
+ *
+ */
+class MenuItem {
+  public $id;
+  public $menu_id;
+  public $day;
+  public $t;
+  public $title;
+  public $body;
+
+  /**
+   * Return the purchases of this MenuItem
+   *
+   * @return array<MenuItem>    purchases of this MenuItem
+   */
+  function purchase_items() {
+    $rs = mysql_query(sprintf("
+      SELECT pi.*, p.family_name
+        FROM purchase_item pi
+             JOIN purchase p ON p.id = pi.purchase_id
+       WHERE p.status  = 'paid'
+         AND p.menu_id = %d
+         AND pi.day    = '%s'
+       ORDER BY pi.child_grade, p.family_name, pi.child_name",
+      q($this->menu_id),
+      q($this->day)
+    ));
+    $purchase_items = array();
+    while ($item = mysql_fetch_object($rs, 'PurchaseItem')) {
+      array_push($purchase_items, $item);
+    }
+    return $purchase_items;
+  }
+
+  /**
+   * Return the purchase of this MenuItem organized by grade
+   * 
+   * @return array              purchases of this MenuItem
+   */
+  function purchase_items_by_grade() {
+    $purchase_items_by_grade = array();
+    $purchase_items = $this->purchase_items();
+    foreach ($purchase_items as $item) {
+      $grade = $item->child_grade;
+      if (!array_key_exists($grade, $purchase_items_by_grade)) {
+        $purchase_items_by_grade[$grade] = array();
+      }
+      array_push($purchase_items_by_grade[$grade], $item);
+    }
+    return $purchase_items_by_grade;
+  }
+}
+
 ?>

@@ -21,6 +21,7 @@ div.informational {
 
 #calendar {
   border-spacing: 0;
+  background: #FFFFFF;
 }
 
 #calendar td {
