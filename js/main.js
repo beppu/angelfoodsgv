@@ -86,6 +86,29 @@
       return false;
     });
 
+    // validate
+    $('#order').submit(function(ev){
+      var errors = [];
+      if ($('#family-name').val().match(/^\s*$/)) {
+        errors.push({
+          message: 'Please fill in your Family Name.',
+          action: 'gritter'
+        });
+      }
+      if ($('#phone-number').val().match(/^\s*$/)) {
+        errors.push({
+          message: 'Please fill in your Family Name.',
+          action: 'gritter'
+        });
+      }
+      if (errors.length) {
+        console.log(errors);
+        return false;
+      } else {
+        return true;
+      }
+    });
+
   });
 
 })(jQuery);
