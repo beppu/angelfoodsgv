@@ -50,7 +50,7 @@ class Purchase {
     ));
     if ($rs) {
       $this->id = mysql_insert_id();
-      $receipt_id = sha1($this->id);
+      $receipt_id = sha1($config->receipt_id_salt . $this->id);
       $rs2 = mysql_query(sprintf("UPDATE purchase SET receipt_id = '%s' WHERE id = %d", q($receipt_id), q($this->id)));
       if ($rs2) {
         $this->receipt_id = $receipt_id;

@@ -8,11 +8,13 @@ $config->db_host     = "localhost:3306";
 $config->db_user     = "root";
 $config->db_password = "";
 
+$config->receipt_id_salt = "s3cr3t";
+
 $config->default_regular_price = 5.00;
 $config->default_double_price  = 6.00;
 
 $config->paypal_api_url        = "https://api-3t.sandbox.paypal.com/nvp";
-$config->paypal_api_version    = "51.0";
+$config->paypal_api_version    = "56.0";
 $config->paypal_api_user       = "";
 $config->paypal_api_password   = "";
 $config->paypal_api_signature  = "";
