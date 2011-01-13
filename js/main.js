@@ -30,7 +30,7 @@
         var hidden = $.makeArray(li.map(function(i,x){
           var day = $(x);
           if (!day.hasClass('none')) {
-            var n = day.text().replace(/^\s*/,'');
+            var n = day.text().match(/(\d+)/)[0];
             return n + "-" + day.attr('class');
           }
         })).join(',');
