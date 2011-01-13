@@ -43,7 +43,9 @@ class Purchase {
    * @return  boolean       Was the insert successful?
    */
   function create() {
-    $rs = mysql_query(sprintf("INSERT INTO purchase (menu_id, session_id, family_name, phone_number, status, created_on) VALUES (%d, '%s', '%s', '%s', '%s', '%s')",
+    $rs = mysql_query(sprintf("
+      INSERT INTO purchase (menu_id, session_id, family_name, phone_number, status, created_on)
+      VALUES (%d, '%s', '%s', '%s', '%s', '%s')",
       q($this->menu_id), q($this->session_id), q($this->family_name), q($this->phone_number), q($this->status), now()
     ));
     if ($rs) {
@@ -100,7 +102,9 @@ class Purchase {
    * @return  boolean               Was the insert successful?
    */
   function add_item($item) {
-    $rs = mysql_query(sprintf("INSERT INTO purchase_item (purchase_id, day, t, child_name, child_grade, price, created_on) VALUES (%d, %d, '%s', '%s', %d, %0.2f, '%s')",
+    $rs = mysql_query(sprintf("
+      INSERT INTO purchase_item (purchase_id, day, t, child_name, child_grade, price, created_on)
+      VALUES (%d, %d, '%s', '%s', %d, %0.2f, '%s')",
       q($this->id), q($item->day), q($item->t), q($item->child_name), q($item->child_grade), $item->price, now()
     ));
     $item->id = mysql_insert_id();
