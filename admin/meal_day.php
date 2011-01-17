@@ -29,16 +29,6 @@ function summary($items) {
   }
   return $n;
 }
-
-function grade_summary($grade, $items) {
-  $n = summary($items);
-  return sprintf("%s { regular: %d, double: %d }", 
-    grade($grade),
-    $n->regular,
-    $n->double
-  );
-}
-
 ?>
 
 <h1><a href="index.php">Admin</a> &#x27a4; <a href="meal_schedule.php?menu_id=<?= $menu_id ?>">Meal Schedule</a> &#x27a4; <?= strftime('%D', $ts) ?></h1>
@@ -73,9 +63,11 @@ function grade_summary($grade, $items) {
   <tbody>
   <?php
   foreach ($purchase_items_by_grade as $grade => $purchase_items) {
+    $n = summary($purchase_items);
   ?>
     <tr>
-      <th colspan="3"><?= grade_summary($grade, $purchase_items) ?></th>
+      <th colspan="2"><?= grade($grade) ?></th>
+      <th><?= sprintf("regular: %d, double %d", $n->regular, $n->double) ?></th>
     </tr>
     <?php
     foreach ($purchase_items as $item) {
