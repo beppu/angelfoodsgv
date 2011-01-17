@@ -41,12 +41,7 @@ $last_name   = ucfirst($purchase->family_name);
   foreach ($children as $key => $items) {
     $info = explode('|', $key);
     $child_name  = $info[0];
-    $child_grade = "";
-    if ($info[1] == 0) {
-      $child_grade = "Kindergarten";
-    } else {
-      $child_grade = sprintf('Grade %d', $info[1]);
-    }
+    $child_grade = grade($info[1]);
   ?>
     <tr>
       <th colspan="5"><?= "$child_name / $child_grade" ?></th>

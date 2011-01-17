@@ -33,7 +33,7 @@ function summary($items) {
 function grade_summary($grade, $items) {
   $n = summary($items);
   return sprintf("%s { regular: %d, double: %d }", 
-    ($grade == 0) ? "Kindergarten" : "Grade $grade",
+    grade($grade),
     $n->regular,
     $n->double
   );

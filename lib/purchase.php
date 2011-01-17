@@ -274,7 +274,7 @@ class Purchase {
     ));
     $i = 0;
     while ($s = mysql_fetch_object($rs)) {
-      $details["L_NAME$i"] = sprintf("%s Grade %s - %s Meals", $s->child_name, $s->child_grade, ucfirst($s->t));
+      $details["L_NAME$i"] = sprintf("%s %s - %s Meals", $s->child_name, grade($s->child_grade), ucfirst($s->t));
       $details["L_AMT$i"]  = ($s->t == "regular") ? $menu->regular_price : $menu->double_price;
       $details["L_QTY$i"]  = $s->quantity;
       $i++;
