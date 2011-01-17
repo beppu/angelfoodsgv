@@ -1,0 +1,66 @@
+body {
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 12pt;
+}
+
+ul.picker {
+  margin: 0;
+  padding: 0;
+}
+
+ul.picker li {
+  display: inline;
+  padding: 2px;
+  border: 1px solid #000;
+}
+
+ul.picker li.regular {
+  background: #C0FFC0;
+}
+
+ul.picker li.double {
+  background: #90D090;
+  color: #FFFFFF;
+}
+
+dl.receipt dt {
+  font-weight: bold;
+}
+
+dl.receipt dd {
+  padding: 0;
+  margin: 0 0 1em 0.5em;
+}
+
+dl.legend dt.regular {
+  width: 140px;
+  background: #C0FFC0;
+}
+
+dl.legend dt.double {
+  width: 140px;
+  background: #90D090;
+  color: #FFFFFF;
+}
+
+dl.legend dd {
+  margin-top: -1.2em;
+  margin-left: 160px;
+}
+
+table.receipt th {
+  text-align: left;
+  border-bottom: 2px solid #000;
+}
+
+table.receipt td {
+  padding: 8px;
+}
+
+table.receipt td.numeric {
+  text-align: right;
+}
+
+table.receipt tfoot tr td {
+  border-top: 4px solid #000;
+}
