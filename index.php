@@ -29,6 +29,7 @@ $food_days = $menu->items('food');
           <td>
             <select name="grade[]">
               <option value="-">-</option>
+              <option value="-1">Pre-K</option>
               <option value="0">K</option>
               <option>1</option>
               <option>2</option>
@@ -98,6 +99,7 @@ $food_days = $menu->items('food');
           <td>
             <select name="grade[]">
               <option value="-">-</option>
+              <option value="-1">Pre-K</option>
               <option value="0">K</option>
               <option>1</option>
               <option>2</option>

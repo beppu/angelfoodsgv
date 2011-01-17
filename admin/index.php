@@ -10,7 +10,8 @@ include('../header.php');
 <h1><?php echo $title ?></h1>
 
 <div id="commands">
-  <a href="menu_new.php">Add New Menu</a>
+  <a href="menu_new.php">Add New Menu</a> |
+  <a href="backup.php">Download Database Backup</a>
 </div>
 
 <table id="menus" class="mediagroove" width="100%" cellpadding="0" cellspacing="0">

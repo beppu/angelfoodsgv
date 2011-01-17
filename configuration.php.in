@@ -3,10 +3,12 @@ global $config;
 $config = new stdClass();
 $config->environment = "development";   # or "live"
 
-$config->db          = "angelfoodsgv";
-$config->db_host     = "localhost:3306";
-$config->db_user     = "root";
-$config->db_password = "";
+$config->db            = "angelfoodsgv";
+$config->db_host       = "localhost:3306";
+$config->db_user       = "root";
+$config->db_password   = "";
+$config->db_dump       = "/opt/local/bin/mysqldump";
+$config->db_backup_dir = "/home/angelfoodsgv/public_html/backups";
 
 $config->receipt_id_salt = "s3cr3t";
 
