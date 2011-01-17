@@ -97,12 +97,20 @@ $food_days   = $menu->items('food');
   </tfoot>
 </table>
 
-<dl class="legend">
-  <dt class="regular">Light Green</dt>
-  <dd><?= sprintf('$%0.2f', $menu->regular_price) ?></dd>
-  <dt class="double">Dark Green</dt>
-  <dd><?= sprintf('$%0.2f', $menu->double_price) ?></dd>
-</dl>
+<table cellspacing="0" cellpadding="4">
+  <tbody>
+    <tr>
+      <td width="120">Lunch</td>
+      <td width="80"class="numeric">$<?= $menu->regular_price ?></td>
+      <td><ul class="picker"><li class="regular">&nbsp;1</li></ul></td>
+    </tr>
+    <tr>
+      <td>Double Entree</td>
+      <td class="numeric">+$<?= sprintf('%0.2f', $menu->double_price - $menu->regular_price) ?></td>
+      <td><ul class="picker"><li class="double">&nbsp;2</li></ul></td>
+    </tr>
+  </tbody>
+</table>
 
 </body>
 </html>

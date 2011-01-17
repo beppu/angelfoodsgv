@@ -3,6 +3,10 @@ body {
   font-size: 12pt;
 }
 
+td.numeric {
+  text-align: right;
+}
+
 ul.picker {
   margin: 0;
   padding: 0;
@@ -55,10 +59,6 @@ table.receipt th {
 
 table.receipt td {
   padding: 8px;
-}
-
-table.receipt td.numeric {
-  text-align: right;
 }
 
 table.receipt tfoot tr td {
