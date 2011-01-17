@@ -19,7 +19,9 @@ $days    = $menu->items('food');
     <tr>
       <th width="20%" colspan="2">Day</th>
       <th>Meal</th>
-      <th width="15%"># of Meals</th>
+      <th width="10%"># of Regular</th>
+      <th width="10%"># of Double</th>
+      <th width="10%"># of Meals</th>
     </tr>
   </thead>
   <tbody>
@@ -32,6 +34,8 @@ $days    = $menu->items('food');
       <td><a href="meal_day.php?menu_id=<?= $menu->id ?>&amp;day=<?= $item->day ?>"><?= sprintf('%02d/%02d', $menu->month, $item->day) ?></a></td>
       <td><?= date('l', $menu->timestamp_for_day($item->day)) ?></td>
       <td><?= $item->title ?> <?= $extra ?></td>
+      <td class="numeric"><?= $item->regulars ?></td>
+      <td class="numeric"><?= $item->doubles ?></td>
       <td class="numeric"><?= $item->orders ?></td>
     </tr>
   <?php

@@ -173,6 +173,20 @@ class Menu {
                   FROM purchase_item pi 
                        JOIN purchase p ON p.id = pi.purchase_id 
                  WHERE pi.day = mi.day 
+                   AND pi.t = 'regular'
+                   AND p.menu_id = mi.menu_id
+                   AND p.status = 'paid') as regulars,
+               (SELECT count(pi.id) 
+                  FROM purchase_item pi 
+                       JOIN purchase p ON p.id = pi.purchase_id 
+                 WHERE pi.day = mi.day 
+                   AND pi.t = 'double'
+                   AND p.menu_id = mi.menu_id
+                   AND p.status = 'paid') as doubles,
+               (SELECT count(pi.id) 
+                  FROM purchase_item pi 
+                       JOIN purchase p ON p.id = pi.purchase_id 
+                 WHERE pi.day = mi.day 
                    AND p.menu_id = mi.menu_id
                    AND p.status = 'paid') as orders
           FROM menu_item mi 
@@ -184,6 +198,20 @@ class Menu {
     } else {
       $query = sprintf("
         SELECT mi.*,  
+               (SELECT count(pi.id) 
+                  FROM purchase_item pi 
+                       JOIN purchase p ON p.id = pi.purchase_id 
+                 WHERE pi.day = mi.day 
+                   AND pi.t = 'regular'
+                   AND p.menu_id = mi.menu_id
+                   AND p.status = 'paid') as regulars,
+               (SELECT count(pi.id) 
+                  FROM purchase_item pi 
+                       JOIN purchase p ON p.id = pi.purchase_id 
+                 WHERE pi.day = mi.day 
+                   AND pi.t = 'double'
+                   AND p.menu_id = mi.menu_id
+                   AND p.status = 'paid') as doubles,
                (SELECT count(pi.id) 
                   FROM purchase_item pi 
                        JOIN purchase p ON p.id = pi.purchase_id 
