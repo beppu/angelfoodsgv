@@ -9,7 +9,7 @@ $tables = array(
   "purchase_item"
 );
 
-$timestamp = strftime('%Y%m%s%H%M%S');
+$timestamp = strftime('%Y%m%d%H%M%S');
 
 $backup_filename = "angelfoodsgv-backup-$timestamp.txt";
 $backup_dir = $config->db_backup_dir . "/$timestamp";
