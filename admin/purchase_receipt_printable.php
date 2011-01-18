@@ -42,7 +42,7 @@ $food_days   = $menu->items('food');
     <tr>
       <th width="15%">Child's Name</th>
       <th width="15%">Grade</th>
-      <th>Food</th>
+      <th>Meals</th>
       <th width="10%">Price</th>
     </tr>
   </thead>
