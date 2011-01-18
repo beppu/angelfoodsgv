@@ -105,7 +105,7 @@ $food_days   = $menu->items('food');
       <td><ul class="picker"><li class="regular">&nbsp;1</li></ul></td>
     </tr>
     <tr>
-      <td>Double Entree</td>
+      <td>Double Entr&eacute;e</td>
       <td class="numeric">+$<?= sprintf('%0.2f', $menu->double_price - $menu->regular_price) ?></td>
       <td><ul class="picker"><li class="double">&nbsp;2</li></ul></td>
     </tr>
