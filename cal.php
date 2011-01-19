@@ -46,8 +46,11 @@ $weeks = weeks($menu, $menu->items());
       <tr>
         <?php
         for ($i = 0; $i < 5; $i++) {
-          $item = $week[$i];
+          $item = false;
           $extra = array();
+          if (array_key_exists($i, $week)) {
+            $item = $week[$i];
+          }
           if ($item) { $extra = explode('|', $item->body); }
           if (!$item) {
         ?>
