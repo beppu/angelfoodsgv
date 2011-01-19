@@ -127,7 +127,7 @@ class Menu {
    *
    */
   function delete() {
-    $rs = mysql_query(sprintf("DELETE FROM menu WHERE id = %d", $this->id));
+    $rs = mysql_query(sprintf("DELETE FROM menu WHERE id = %d", q($this->id)));
     return $rs;
   }
 
