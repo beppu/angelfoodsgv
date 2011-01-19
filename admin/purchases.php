@@ -29,7 +29,7 @@ $purchases = $menu->purchases('paid');
   ?>
     <tr>
       <td>
-        <a href="purchase_receipt_printable.php?purchase_id=<?= $p->id ?>"><img src="/images/printer.png" alt="printable receipt" /></a>
+        <a href="purchase_receipt_printable.php?purchase_id=<?= $p->id ?>"><img src="/images/pc_24.gif" alt="printable receipt" /></a>
         <a href="purchase_receipt.php?purchase_id=<?= $p->id ?>"><?= $p->family_name ?></a>
       </td>
       <td><?= $p->phone_number ?></td>
