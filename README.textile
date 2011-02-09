@@ -1,0 +1,7 @@
+h1. Angel Foods
+
+This is the source code for the lunch ordering system at
+"angelfoodsgv.com":http://angelfoodsgv.com/.
+
+It is licensed under the GPL v3.0.
+
