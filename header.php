@@ -19,7 +19,7 @@ Released   : 20100423
 <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="/js/jquery.gritter.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
-<?php if (isset($is_admin)) { ?>
+<?php if (isset($is_admin) && $is_admin) { ?>
 <script type="text/javascript" src="/js/admin.js"></script>
 <link href="/css/admin.css" rel="stylesheet" type="text/css" media="screen" />
 <?php } ?>
@@ -61,7 +61,7 @@ Released   : 20100423
 <!-- end #header -->
 <hr />
 <?php
-if (isset($top_section) && $is_admin) {
+if (isset($top_section)) {
   include($top_section);
 }
 ?>

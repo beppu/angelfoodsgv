@@ -4,6 +4,7 @@ require_once('../lib/init.php');
 $is_admin = true;
 $title = "Admin";
 $menus = Menu::list_all();
+$order_form_enabled = true; # Purchase::order_form_enabled();
 include('../header.php');
 ?>
 
@@ -12,6 +13,9 @@ include('../header.php');
 <div id="commands">
   <a href="menu_new.php">Add New Menu</a> |
   <a href="backup.php">Download Database Backup</a>
+  <!--
+  <a id="order-form-toggler" href="#">Turn Order Form <?= $order_form_enabled ? 'Off' : 'On' ?></a>
+  -->
 </div>
 
 <table id="menus" class="mediagroove" width="100%" cellpadding="0" cellspacing="0">

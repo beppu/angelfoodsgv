@@ -1,6 +1,7 @@
 <?php
 require_once('init.php');
 
+$menu = Menu::current();
 $title = "Angel Foods";
 $top_section = 'cal.php';
 include('header.php');
@@ -14,7 +15,6 @@ $children = array(
   3 => ""
 );
 
-# $menu is initialized in header.php
 $food_days = $menu->items('food');
 ?>
 <div id="factory" style="display: none;">

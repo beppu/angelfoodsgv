@@ -1,4 +1,11 @@
 <?php
+#
+# Please initialize $menu before including this file.
+#
+
+/**
+ *
+ */
 function weeks($menu, $items) {
   $index_dow = array(
     "Monday"    => 0,
@@ -28,7 +35,6 @@ function weeks($menu, $items) {
   return $weeks;
 }
 
-$menu  = Menu::current();
 $weeks = weeks($menu, $menu->items());
 ?>
 <div id="calendar-section" class="top-section">
