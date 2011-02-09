@@ -13,6 +13,10 @@ div.informational {
   padding: 2em;
 }
 
+div.informational h1 {
+  color: #333;
+}
+
 #calendar-section h1 {
   padding: 0.5em;
   background-color: #24130F;
