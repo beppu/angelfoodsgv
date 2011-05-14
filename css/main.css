@@ -13,8 +13,21 @@ div.informational {
   padding: 2em;
 }
 
-div.informational h1 {
+div.informational h1,
+div.informational h2,
+div.informational h3,
+div.informational h4 {
+  padding-top: 1em;
   color: #333;
+}
+
+div.informational h1,
+div.informational h3 {
+  text-align: center;
+}
+
+div.informational h2 {
+  border-bottom: 2px solid #555;
 }
 
 #calendar-section h1 {
@@ -162,7 +175,7 @@ ul.picker li.regular {
 }
 
 ul.picker li.double {
-  background: #90D090;
+  background: #80D080;
   color: #FFFFFF;
 }
 
