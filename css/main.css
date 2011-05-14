@@ -10,7 +10,10 @@ div.top-section {
 }
 
 div.informational {
-  padding: 2em;
+  padding: 2em 8em;
+  font-size: 1.5em;
+  line-height: 155%;
+  text-align: left;
 }
 
 div.informational h1,
@@ -21,13 +24,20 @@ div.informational h4 {
   color: #333;
 }
 
-div.informational h1,
-div.informational h3 {
+div.informational h1 {
+  margin-bottom: 18px;
   text-align: center;
+  font-family: 'Tangerine', serif;
+  font-size: 4em;
 }
 
 div.informational h2 {
-  border-bottom: 2px solid #555;
+  font-size: 1.8em;
+  margin: 10px 4px 8px -20px;
+  border-bottom: 1px solid #888;
+}
+
+div.informational p {
 }
 
 #calendar-section h1 {

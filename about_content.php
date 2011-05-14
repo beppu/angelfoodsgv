@@ -1,45 +1,47 @@
 <div class="top-section">
   <div class="informational">
 
-    <h1>Angel Foods</h1>
-    <h3>Family information</h3>
+    <h1>About Angel Foods</h1>
 
     <h2>Welcome Families!</h2>
-    <p>Good nutrition is only living a healthy lifestyle and the goal of
+    <p>Good nutrition means only living a healthy lifestyle.  The goal of
     providing nutritious meals for kids requires a group effort between the
-    family, the school and caterer.</p>
+    family, the school and the caterer.</p>
     <div>
       <img src="/images/angelfoodsgv_01.png" />
     </div>
 
-    <h2>Commitment to quality</h2>
-    <p>We believe in the commitment of a good quality fresh fruits and
-    vegetables, the preparation of the food with good quality of
-    ingredients.</p>
+    <h2>A Commitment to Quality</h2>
+    <p>We are commited to using good quality fresh fruits and
+    vegetables, and preparing food with good quality ingredients.</p>
     <div>
       <img src="/images/angelfoodsgv_02.png" />
     </div>
 
-    <h2>Simple is Best</h2>
+    <h2>Simple Is Best</h2>
     <p>Children’s nutrition is the cornerstone of what we do. We know
-    children’s palates are not developed as teens or adults so we take great
+    children’s palates are not as developed as teens or adults so we take great
     strides to ensure the menus are simple yet tasty. We serve the foods you
-    grew up on and we do it in proper portions with healthy ingredients to
+    grew up on, and we do it in proper portions with healthy ingredients to
     create a menu that is balanced and appealing for the kid.</p>
     <div>
       <img src="/images/angelfoodsgv_03.png" />
     </div>
 
     <h2>Allergies &amp; Special Needs</h2>
-    <p>We are allergy conscious provider. Although we cannot guarantee an allergen free environment, we do are best to ensure the safety of our products. For specific questions or concerns, contact our office prior to ordering.</p>
+    <p>We are an allergy conscious provider. Although we cannot guarantee an
+    allergen free environment, we do are best to ensure the safety of our
+    products. For specific questions or concerns, contact our office prior to
+    ordering.</p>
 
-    <h2>Ordering</h2>
-    <p>Families may place orders on line at <a href="http://www.angelfoodsgv.com/">www.angelfoodsGv.com</a> or by delivering
-    the order to the school for pick-up. Order will not be processed without the
-    payment and all orders or charges must be received a day before the service for
-    processing. Or you can call on the morning before 11: am on the same day in
-    case of an emergency lunch. Please call marilu <b>(562) 556-6563</b> Thank
-    you!</p>
+    <h2>Ordering</h2> <p>Families may place orders online at
+    <a href="http://www.angelfoodsgv.com/">www.AngelFoodsGV.com</a> or by
+    delivering the order to the school for pick-up. An order will not be
+    processed without payment, and all orders and payments must be received a
+    day before the service for processing. You may also call in the morning
+    before 11:00am on the same day in case of an emergency lunch. Please call
+    MariLu at <b>(562) 556-6563</b>.  </p>
+    <p>Thank you!</p>
 
   </div>
 </div>
