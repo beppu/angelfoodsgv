@@ -12,7 +12,7 @@ div.top-section {
 div.informational {
   padding: 2em 8em;
   font-size: 1.5em;
-  line-height: 155%;
+  line-height: 125%;
   text-align: left;
 }
 
@@ -25,19 +25,24 @@ div.informational h4 {
 }
 
 div.informational h1 {
-  margin-bottom: 18px;
+  padding-top: 20px;
+  margin: 0 0 20px -15px;
   text-align: center;
   font-family: 'Tangerine', serif;
   font-size: 4em;
+  text-shadow: 1px 1px 1px #999;
 }
 
 div.informational h2 {
   font-size: 1.8em;
   margin: 10px 4px 8px -20px;
+  padding-bottom: 2px;
   border-bottom: 1px solid #888;
+  text-shadow: 1px 1px 1px #999;
 }
 
 div.informational p {
+  text-align: left;
 }
 
 #calendar-section h1 {

@@ -23,7 +23,7 @@
     children’s palates are not as developed as teens or adults so we take great
     strides to ensure the menus are simple yet tasty. We serve the foods you
     grew up on, and we do it in proper portions with healthy ingredients to
-    create a menu that is balanced and appealing for the kid.</p>
+    create a menu that is balanced and appealing for the child.</p>
     <div>
       <img src="/images/angelfoodsgv_03.png" />
     </div>
