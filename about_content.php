@@ -34,13 +34,15 @@
     products. For specific questions or concerns, contact our office prior to
     ordering.</p>
 
-    <h2>Ordering</h2> <p>Families may place orders online at
+    <h2>Ordering</h2>
+    <p>Families may place orders online at
     <a href="http://www.angelfoodsgv.com/">www.AngelFoodsGV.com</a> or by
     delivering the order to the school for pick-up. An order will not be
-    processed without payment, and all orders and payments must be received a
-    day before the service for processing. You may also call in the morning
-    before 11:00am on the same day in case of an emergency lunch. Please call
-    MariLu at <b>(562) 556-6563</b>.  </p>
+    processed without payment, and all orders and payments must be received at
+    least a day before the service for processing. You may also call in the
+    morning before 11:00am on the same day in case of an emergency lunch.
+    Please call MariLu at <b>(562) 556-6563</b>.</p>
+
     <p>Thank you!</p>
 
   </div>

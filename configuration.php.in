@@ -1,7 +1,7 @@
 <?php
 global $config;
 $config = new stdClass();
-$config->environment = "development";   # or "live"
+$config->environment = "development";   # or "production"
 
 $config->db            = "angelfoodsgv";
 $config->db_host       = "localhost:3306";
