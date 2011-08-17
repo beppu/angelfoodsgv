@@ -140,7 +140,8 @@ $food_days = $menu->items('food');
         <a href="#buttons">Add Another Child</a>
       </div>
       <div class="purchase">
-        <input type="image" name="submit" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" />
+        <!-- <input type="image" name="submit" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" /> -->
+        <input type="image" name="submit" src="https://checkout.google.com/buttons/checkout.gif?merchant_id=511312573122065&w=180&h=46&style=trans&variant=disabled&loc=en_US" />
       </div>
       <div class="clear">&nbsp;</div>
     </div>

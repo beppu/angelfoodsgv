@@ -187,8 +187,23 @@
             errors[i].action.call()
           }
         }
+
+        // XXX
+        $.gritter.add({
+          title : "Under Construction",
+          text  : "We'll start taking orders on 8/22."
+        });
+
         return false;
       } else {
+
+        // XXX
+        $.gritter.add({
+          title : "Under Construction",
+          text  : "We'll start taking orders on 8/22."
+        });
+        return false;
+
         return true;
       }
     });
