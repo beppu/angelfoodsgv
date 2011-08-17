@@ -103,7 +103,7 @@ class Menu {
       $item->dow     = $d['dow'];
       $item->t       = 'food';
       $item->title   = '';
-      $item->body    = '';
+      $item->body    = '||';
       $this->add_item($item);
     }
     return $rs;
