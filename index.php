@@ -1,7 +1,15 @@
 <?php
 require_once('init.php');
 
-$menu = Menu::current();
+# By default the current menu is selected.
+# However, an explicit menu_id may be given as well.
+$menu = null;
+if (isset($_GET['menu_id'])) {
+  $menu = Menu::find($_GET['menu_id']);
+} else {
+  $menu = Menu::current();
+}
+
 $title = "Angel Foods";
 $top_section = 'cal.php';
 include('header.php');
