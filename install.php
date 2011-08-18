@@ -10,7 +10,7 @@ require('init.php');
 global $config;
 $menu = new Menu();
 $menu->year = 2011;
-$menu->month = 9;
+$menu->month = 8;
 $menu->regular_price = $config->default_regular_price;
 $menu->double_price  = $config->default_double_price;
 $menu->create();

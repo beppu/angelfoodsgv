@@ -29,6 +29,8 @@ create table config (
   current_menu_id int
 );
 
+insert into config values (1, 1);
+
 -- Purchase has_many PurchaseItems
 create table purchase (
   id int not null primary key auto_increment,
