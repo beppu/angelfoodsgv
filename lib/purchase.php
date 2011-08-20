@@ -329,10 +329,84 @@ class Purchase {
     global $config;
     // TODO
   }
+  
+  /**
+   * Send a POST request to Google Checkout
+   *
+   * @param  string $api_method
+   * @param  array  $params
+   * @param  array  $headers
+   * @return object $r
+   */
+  function google_checkout_post($api_method, $params="", $headers=null) {
+    global $config;
+    $ch = curl_init($config->google_checkout_api_url);
+    if ($ch) {
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_VERBOSE, 1);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+      // Turn off the server and peer verification (TrustManager Concept).
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+
+      $params_as_string = "";
+      if (is_array($params)) {
+        foreach ($params as $k => $v) {
+          $params_as_string .= "&" . urlencode($k) . "=" . urlencode($v);
+        }
+      } else {
+        $params_as_string = $params;
+      }
+
+      // XXX - This needs to be adapted for Google Checkout.
+      $post_body = sprintf(
+        'METHOD=%s&VERSION=%s&USER=%s&PWD=%s&SIGNATURE=%s%s',
+        $api_method,
+        urlencode($config->paypal_api_version),
+        urlencode($config->paypal_api_user),
+        urlencode($config->paypal_api_password),
+        urlencode($config->paypal_api_signature),
+        $params_as_string
+      );
+
+      // Set the request as a POST FIELD for curl.
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+      $response = curl_exec($ch);
+      if (!$response) {
+        error_log("$api_method failed: ".curl_error($ch).'('.curl_errno($ch).')');
+        return false;
+      } else {
+        $r = array();
+        $kv_list = explode("&", $response);
+        foreach ($kv_list as $kv) {
+          $pair = explode("=", $kv);
+          if (count($pair) > 1) {
+            $r[$pair[0]] = $pair[1];
+          }
+        }
+		// XXX - This probably doesn't apply to Google Checkout.
+        if((0 == sizeof($r)) || !array_key_exists('ACK', $r)) {
+          error_log("Invalid HTTP Response for POST request($post_body)");
+          return false;
+        }
+        return $r;
+      }
+    } else {
+      error_log("$api_method failed: ".curl_error($ch).'('.curl_errno($ch).')');
+      return false;
+    }
+  }
+  
+  /**
+   * I also need methods to send the order in and confirm the order.
+   *
+   */
 }
 
 /**
- * What is a purchase item?
+ * An object representing one meal for one student on a particular day.
+ * A Purchase has many PurchaseItems.
  */
 class PurchaseItem {
   public $id;
