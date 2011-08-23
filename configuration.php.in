@@ -13,10 +13,25 @@ $config->receipt_id_salt = "s3cr3t";
 $config->default_regular_price = 5.00;
 $config->default_double_price  = 6.00;
 
-$config->paypal_api_url          = "https://api-3t.sandbox.paypal.com/nvp";
+$config->paypal_api_url          = "https://api-3t.paypal.com/nvp";
 $config->paypal_api_version      = "56.0";
 $config->paypal_api_user         = "";
 $config->paypal_api_password     = "";
 $config->paypal_api_signature    = "";
 $config->paypal_api_redirect_url = "https://www.paypal.com/webscr&cmd=_express-checkout&token=%s";
+
+$config->google_merchant_id      = "";
+$config->google_merchant_key     = "";
+$config->google_checkout_api_url = "https://checkout.google.com/api/checkout/v2/merchantCheckout/Merchant/" . $config->google_merchant_id;
+
+if ($config->environment == "development") {
+
+  $config->paypal_api_url          = "https://api-3t.sandbox.paypal.com/nvp";
+  $config->paypal_api_redirect_url = "https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=%s";
+
+  $config->google_merchant_id      = "";
+  $config->google_merchant_key     = "";
+  $config->google_checkout_api_url = "https://sandbox.google.com/checkout/api/checkout/v2/merchantCheckout/Merchant/" . $config->google_merchant_id;
+
+}
 ?>
