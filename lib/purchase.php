@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * What is a purchase?
  */
@@ -7,11 +8,42 @@ class Purchase {
   public $id;
   public $menu_id;
   public $session_id;
+  public $receipt_id;
+  public $google_serial_number;
   public $family_name;
   public $phone_number;
   public $status;
   public $created_on;
   public $modified_on;
+
+  public static $google_checkout_purchase_f = "
+  <?xml version=\"1.0\" encoding=\"UTF-8\"?>
+  <checkout-shopping-cart xmlns=\"http://checkout.google.com/schema/2\">
+    <shopping-cart>
+      <items>
+  %s
+      </items>
+    </shopping-cart>
+    <checkout-flow-support>
+      <merchant-checkout-flow-support>
+        <shipping-methods>
+          <pickup name=\"Pickup\">
+            <price currency=\"USD\">0.00</price>
+          </pickup>
+        </shipping-methods>
+      </merchant-checkout-flow-support>
+    </checkout-flow-support>
+  </checkout-shopping-cart>
+  ";
+
+  public static $google_checkout_purchase_item_f = "
+        <item>
+          <item-name>%s</item-name>
+          <item-description>%s</item-description>
+          <unit-price currency=\"USD\">%.2f</unit-price>
+          <quantity>%d</quantity>
+        </item>
+  ";
 
   /**
    * Retrieve a purchase from the database by id.
@@ -61,6 +93,20 @@ class Purchase {
   }
 
   /**
+   * Perform a limited update of the purchase record.
+   * (If we need more fields updated, this method will be updated.)
+   *
+   * @return boolean        Was the update successful?
+   */
+  function update() {
+    $rs = mysql_query(sprintf(
+      "UPDATE purchase SET google_serial_number = '%s' WHERE id = %d",
+      q($this->google_serial_number), q($this->id)
+    ));
+    return $rs;
+  }
+
+  /**
    * Return the Menu object associated with this purchase.
    *
    * @return Menu     Menu object for this purchase
@@ -68,7 +114,7 @@ class Purchase {
   function menu() {
     return Menu::find($this->menu_id);
   }
-  
+
   /**
    * Cancel this order.
    *
@@ -113,18 +159,18 @@ class Purchase {
 
   /**
    * Get items
-   * 
+   *
    * @return  array                 an array of PurchaseItem objects.
    */
   function items() {
     $rs = mysql_query(sprintf("
       SELECT pi.*,
-             mi.title 
-        FROM purchase_item pi 
-             JOIN purchase p   ON pi.purchase_id = p.id 
-             JOIN menu m       ON p.menu_id = m.id 
-             JOIN menu_item mi ON (m.id = mi.menu_id AND pi.day = mi.day) 
-       WHERE purchase_id = %d 
+             mi.title
+        FROM purchase_item pi
+             JOIN purchase p   ON pi.purchase_id = p.id
+             JOIN menu m       ON p.menu_id = m.id
+             JOIN menu_item mi ON (m.id = mi.menu_id AND pi.day = mi.day)
+       WHERE purchase_id = %d
        ORDER BY pi.id",
       q($this->id)
     ));
@@ -157,7 +203,7 @@ class Purchase {
 
   /**
    * Total amount of this purchase
-   * 
+   *
    * @return  float                 dollar amount of this purchase
    */
   function amount() {
@@ -168,6 +214,40 @@ class Purchase {
     } else {
       return $rs;
     }
+  }
+
+  /**
+   * Summary of items suitable for sending to a payment processing system.
+   *
+   * @return array[stdClass] summarized list of items
+   */
+  function item_summary() {
+    $menu = Menu::find($this->menu_id);
+    if (!$menu) {
+      error_log("Menu not found");
+      return false;
+    }
+
+    $rs = mysql_query(sprintf("
+      SELECT purchase_id, child_name, child_grade, t,
+             SUM(price) AS price,
+             COUNT(t)   AS quantity
+        FROM purchase_item
+       WHERE purchase_id = %d
+       GROUP BY purchase_id, child_name, child_grade, t
+       ORDER BY child_name, child_grade, t",
+      q($this->id)
+    ));
+
+    $items = array();
+    while ($s = mysql_fetch_object($rs)) {
+      $item = new stdClass();
+      $item->name     = sprintf("%s %s - %s Meals", $s->child_name, grade($s->child_grade), ucfirst($s->t));
+      $item->amount   = ($s->t == "regular") ? $menu->regular_price : $menu->double_price;
+      $item->quantity = $s->quantity;
+      array_push($items, $item);
+    }
+    return $items;
   }
 
   /**
@@ -266,9 +346,9 @@ class Purchase {
       SELECT purchase_id, child_name, child_grade, t,
              SUM(price) AS price,
              COUNT(t)   AS quantity
-        FROM purchase_item 
+        FROM purchase_item
        WHERE purchase_id = %d
-       GROUP BY purchase_id, child_name, child_grade, t 
+       GROUP BY purchase_id, child_name, child_grade, t
        ORDER BY child_name, child_grade, t",
       q($this->id)
     ));
@@ -329,46 +409,29 @@ class Purchase {
     global $config;
     // TODO
   }
-  
+
   /**
    * Send a POST request to Google Checkout
    *
-   * @param  string $api_method
-   * @param  array  $params
+   * @param  string $xml
    * @param  array  $headers
-   * @return object $r
+   * @return string $response
    */
-  function google_checkout_post($api_method, $params="", $headers=null) {
+  function google_checkout_post($xml="", $headers=null) {
     global $config;
     $ch = curl_init($config->google_checkout_api_url);
     if ($ch) {
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: text/xml"));
       curl_setopt($ch, CURLOPT_POST, 1);
       curl_setopt($ch, CURLOPT_VERBOSE, 1);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_USERPWD, $config->google_merchant_id . ":" . $config->google_merchant_key);
 
       // Turn off the server and peer verification (TrustManager Concept).
       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
       curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 
-      $params_as_string = "";
-      if (is_array($params)) {
-        foreach ($params as $k => $v) {
-          $params_as_string .= "&" . urlencode($k) . "=" . urlencode($v);
-        }
-      } else {
-        $params_as_string = $params;
-      }
-
-      // XXX - This needs to be adapted for Google Checkout.
-      $post_body = sprintf(
-        'METHOD=%s&VERSION=%s&USER=%s&PWD=%s&SIGNATURE=%s%s',
-        $api_method,
-        urlencode($config->paypal_api_version),
-        urlencode($config->paypal_api_user),
-        urlencode($config->paypal_api_password),
-        urlencode($config->paypal_api_signature),
-        $params_as_string
-      );
+      $post_body = $xml;
 
       // Set the request as a POST FIELD for curl.
       curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
@@ -377,31 +440,69 @@ class Purchase {
         error_log("$api_method failed: ".curl_error($ch).'('.curl_errno($ch).')');
         return false;
       } else {
-        $r = array();
-        $kv_list = explode("&", $response);
-        foreach ($kv_list as $kv) {
-          $pair = explode("=", $kv);
-          if (count($pair) > 1) {
-            $r[$pair[0]] = $pair[1];
-          }
-        }
-		// XXX - This probably doesn't apply to Google Checkout.
-        if((0 == sizeof($r)) || !array_key_exists('ACK', $r)) {
-          error_log("Invalid HTTP Response for POST request($post_body)");
-          return false;
-        }
-        return $r;
+        return $response;
       }
     } else {
       error_log("$api_method failed: ".curl_error($ch).'('.curl_errno($ch).')');
       return false;
     }
   }
-  
+
   /**
-   * I also need methods to send the order in and confirm the order.
+   * Send an order to google checkout
    *
+   * @return string Google Checkout redirect URL
    */
+  function google_checkout_purchase() {
+    global $config;
+
+    $items = $this->item_summary();
+    $item_xml = "";
+    foreach ($items as $i) {
+      $item_xml .= sprintf(
+        Purchase::$google_checkout_purchase_item_f,
+        "Lunch",
+        $i->name,
+        $i->amount,
+        $i->quantity
+      );
+    }
+
+    $purchase_xml = sprintf(Purchase::$google_checkout_purchase_f, $item_xml);
+    $response     = $this->google_checkout_post($purchase_xml);
+
+    $serial_number = null;
+    $redirect_url  = null;
+
+    if ($response) {
+      $doc = new DOMDocument();
+      $doc->loadXML($response);
+      $xpath = new DOMXPath($doc);
+      $nodes = $xpath->query('//*');
+      foreach ($nodes as $n) {
+        if ($n->nodeName == 'checkout-redirect') {
+          $serial_number = $n->attributes->getNamedItem('serial-number')->nodeValue;
+        } elseif ($n->nodeName == 'redirect-url') {
+          $redirect_url = $n->nodeValue;
+        }
+      }
+
+      if ($serial_number && $redirect_url) {
+        // success
+        $this->google_serial_number = $serial_number;
+        $this->update();
+        return $redirect_url;
+      } else {
+        error_log("google_checkout_purchase: bad response");
+        error_log($response);
+        return false;
+      }
+
+    } else {
+      error_log("google_checkout_purchase: no response");
+      return false;
+    }
+  }
 }
 
 /**

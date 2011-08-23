@@ -124,12 +124,24 @@ if (count($errors)) {
         error_log("  ".$d->day);
       }
     }
+
     // redirect to paypal
+    /*
     $paypal_url = $purchase->paypal_set_express_checkout();
     if ($paypal_url) {
       redirect($paypal_url);
     } else {
       error_log("PayPal didn't like our SetExpressCheckout request.");
+      redirect('error.php');
+    }
+    */
+
+    // redirect to google
+    $redirect_url = $purchase->google_checkout_purchase();
+    if ($redirect_url) {
+      redirect($redirect_url);
+    } else {
+      error_log("Google Checkout didn't like our purchase request: purchase_id=" . $purchase->id);
       redirect('error.php');
     }
 
