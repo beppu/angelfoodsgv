@@ -24,6 +24,9 @@ class Purchase {
       <items>
   %s
       </items>
+      <merchant-private-data>
+        <merchant-note>%s</merchant-note>
+      </merchant-private-data>
     </shopping-cart>
     <checkout-flow-support>
       <merchant-checkout-flow-support>
@@ -470,9 +473,8 @@ class Purchase {
       );
     }
 
-    $purchase_xml = sprintf(Purchase::$google_checkout_purchase_f, $item_xml);
-    $response     = $this->google_checkout_post("merchantCheckout", $purchase_xml);
-
+    $purchase_xml  = sprintf(Purchase::$google_checkout_purchase_f, $item_xml, $this->receipt_id);
+    $response      = $this->google_checkout_post("merchantCheckout", $purchase_xml);
     $serial_number = null;
     $redirect_url  = null;
 
