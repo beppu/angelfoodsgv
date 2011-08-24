@@ -10,6 +10,7 @@ class Purchase {
   public $session_id;
   public $receipt_id;
   public $google_serial_number;
+  public $google_order_number;
   public $family_name;
   public $phone_number;
   public $status;
@@ -417,9 +418,9 @@ class Purchase {
    * @param  array  $headers
    * @return string $response
    */
-  function google_checkout_post($xml="", $headers=null) {
+  function google_checkout_post($api_method, $xml="", $headers=null) {
     global $config;
-    $ch = curl_init($config->google_checkout_api_url);
+    $ch = curl_init(sprintf($config->google_checkout_api_url, $api_method));
     if ($ch) {
       curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: text/xml"));
       curl_setopt($ch, CURLOPT_POST, 1);
@@ -469,7 +470,7 @@ class Purchase {
     }
 
     $purchase_xml = sprintf(Purchase::$google_checkout_purchase_f, $item_xml);
-    $response     = $this->google_checkout_post($purchase_xml);
+    $response     = $this->google_checkout_post("merchantCheckout", $purchase_xml);
 
     $serial_number = null;
     $redirect_url  = null;
