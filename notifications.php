@@ -1,5 +1,6 @@
 <?php
 require_once('init.php');
+require_once('lib/notification.php');
 
 /**
  * ask google for a notification by serial number
@@ -50,17 +51,26 @@ function google_checkout_notification_acknowledgement($serial_number) {
 }
 
 /**
- * perform an action based on the notification type
+ * Perform an action based on the Notification type.
+ * Also, save the Notification to the database.
  *
- * @param  DOMXpath $xpath  XPath object for a notification 
- * @return stdClass         result of action
+ * @param  string       $xml    XML for the notification
+ * @return Notification         resulting Notification object
  */
-function action_for_notification($xpath) {
-  $type = "";
-  $r = new stdClass();
-  $r->success = false;
-  return $r;
+function notification($xml) {
+  $notification = new Notification(); 
+  try {
+    $notification->parse($xml)->handle()->create();
+  }
+  catch(Exception $e) {
+    error_log("[notification error]\n");
+    error_log($e->getMessage());
+    error_log($xml);
+  }
+  return $notification;
 }
+
+# main _______________________________________________________________________
 
 # get serial number
 $serial_number = $_POST['serial-number'];
@@ -69,22 +79,20 @@ error_log("notification $serial_number");
 # ask for notification via serial number
 $xml = google_checkout_notification($serial_number);
 
-# parse notification
-$doc = new DOMDocument();
-$doc->loadXML($xml);
-$xpath = new DOMXpath($doc);
-
-# figure out what to do with notification
-$r = action_for_notification($xpath);
+# parse and handle the notification
+$notification = notification($xml);
 
 # send google an xml response letting them know the notification has been handled
-if ($r->success) {
+if ($notification->is_handled) {
   header('Status: 200');
+  header('Content-Type: text/xml');
   print google_checkout_notification_acknowledgement($serial_number);
 } else {
   header('Status: 500');
+  header('Content-Type: text/plain');
   error_log("notification processing FAIL: $xml");
-  error_log(var_export($r, true));
+  error_log(var_export($notification, true));
+  echo(var_export($notification, true));
 }
 
 ?>
