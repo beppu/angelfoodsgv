@@ -243,9 +243,10 @@ class Purchase {
     $items = array();
     while ($s = mysql_fetch_object($rs)) {
       $item = new stdClass();
-      $item->name     = sprintf("%s %s - %s Meals", $s->child_name, grade($s->child_grade), ucfirst($s->t));
-      $item->amount   = ($s->t == "regular") ? $menu->regular_price : $menu->double_price;
-      $item->quantity = $s->quantity;
+      $item->name        = ($s->t == "regular") ? "Lunch" : "Double Entreé";
+      $item->description = sprintf("%s - %s", $s->child_name, grade($s->child_grade));
+      $item->price       = ($s->t == "regular") ? $menu->regular_price : $menu->double_price;
+      $item->quantity    = $s->quantity;
       array_push($items, $item);
     }
     return $items;
@@ -462,9 +463,9 @@ class Purchase {
     foreach ($items as $i) {
       $item_xml .= sprintf(
         Purchase::$google_checkout_purchase_item_f,
-        "Lunch",
         $i->name,
-        $i->amount,
+        $i->description,
+        $i->price,
         $i->quantity
       );
     }
