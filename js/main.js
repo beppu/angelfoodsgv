@@ -191,7 +191,7 @@
         // XXX
         $.gritter.add({
           title : "Under Construction",
-          text  : "We'll start taking orders on 8/22."
+          text  : "We'll start taking orders on 8/26."
         });
 
         return false;
@@ -200,7 +200,7 @@
         // XXX
         $.gritter.add({
           title : "Under Construction",
-          text  : "We'll start taking orders on 8/22."
+          text  : "We'll start taking orders on 8/26."
         });
         return false;
 
