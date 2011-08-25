@@ -64,21 +64,22 @@ class Notification {
   function handle() {
     $xpath = $this->xpath;
     
-    error_log("type: " . $this->type);
+    #error_log("type: " . $this->type);
     switch ($this->type) {
       /* */
       case "new-order-notification":
         // associate a google order number to a Purchase
         // look for the receipt_id we stashed in the merchant-note element
-        $nl - $xpath->query('//g:merchant-note');
+        $nl = $xpath->query('//g:merchant-note');
         if ($nl->length > 0) {
           $receipt_id = $nl->item(0)->nodeValue;
+          #error_log("receipt_id: $receipt_id");
           $purchase   = Purchase::find_by_receipt_id($receipt_id);
-          $purchase->google_order_number($this->google_order_number);
+          $purchase->google_order_number = $this->google_order_number;
           $purchase->update();
         } else {
           $sn = $this->google_serial_number;
-          error_log("google_serial_number: $sn // hope this is a debug new-order-notification event");
+          #error_log("google_serial_number: $sn // hope this is a debug new-order-notification event");
         }
         break;
 
