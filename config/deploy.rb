@@ -13,7 +13,8 @@ namespace :my do
   desc "My first task"
   task :hello, :roles => :app do
     run "echo hello"
-    puts "world"
+    puts self.class
+    puts self.methods.sort
   end
 end
 
