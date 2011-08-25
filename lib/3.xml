@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<risk-information-notification xmlns="http://checkout.google.com/schema/2" serial-number="632177036246335-00005-5">
+  <timestamp>2011-08-23T04:08:03.487Z</timestamp>
+  <risk-information>
+    <ip-address>76.174.253.91</ip-address>
+    <billing-address>
+      <address1>1234 Main St</address1>
+      <address2></address2>
+      <phone></phone>
+      <email>john.beppu@gmail.com</email>
+      <contact-name>John Beppu</contact-name>
+      <company-name></company-name>
+      <fax></fax>
+      <country-code>US</country-code>
+      <city>South Pasadena</city>
+      <postal-code>91030</postal-code>
+      <region>CA</region>
+    </billing-address>
+    <avs-response>Y</avs-response>
+    <cvn-response>M</cvn-response>
+    <eligible-for-protection>true</eligible-for-protection>
+    <partial-cc-number>1111</partial-cc-number>
+    <buyer-account-age>9</buyer-account-age>
+  </risk-information>
+  <google-order-number>632177036246335</google-order-number>
+</risk-information-notification>

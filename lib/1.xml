@@ -1,0 +1,79 @@
+<new-order-notification xmlns="http://checkout.google.com/schema/2" serial-number="632177036246335-00001-7">
+  <buyer-billing-address>
+    <address1>1234 Main St</address1>
+    <address2></address2>
+    <phone></phone>
+    <email>john.beppu@gmail.com</email>
+    <contact-name>John Beppu</contact-name>
+    <company-name></company-name>
+    <fax></fax>
+    <country-code>US</country-code>
+    <city>South Pasadena</city>
+    <postal-code>91030</postal-code>
+    <region>CA</region>
+  </buyer-billing-address>
+  <timestamp>2011-08-23T04:07:00.568Z</timestamp>
+  <google-order-number>632177036246335</google-order-number>
+  <shopping-cart>
+    <merchant-private-data>
+      <merchant-note>bc33ea4e26e5e1af1408321416956113a4658763</merchant-note>
+    </merchant-private-data>
+    <items>
+      <item>
+        <item-name>Lunch</item-name>
+        <item-description>JInah 1st Grade - Regular Meals</item-description>
+        <unit-price currency="USD">5.0</unit-price>
+        <quantity>17</quantity>
+      </item>
+      <item>
+        <item-name>Lunch</item-name>
+        <item-description>John 6th Grade - Regular Meals</item-description>
+        <unit-price currency="USD">5.0</unit-price>
+        <quantity>17</quantity>
+      </item>
+      <item>
+        <item-name>Lunch</item-name>
+        <item-description>Kang Suk Kindergarten - Regular Meals</item-description>
+        <unit-price currency="USD">5.0</unit-price>
+        <quantity>17</quantity>
+      </item>
+      <item>
+        <item-name>Lunch</item-name>
+        <item-description>Linda 2nd Grade - Regular Meals</item-description>
+        <unit-price currency="USD">5.0</unit-price>
+        <quantity>17</quantity>
+      </item>
+    </items>
+  </shopping-cart>
+  <order-adjustment>
+    <merchant-codes />
+    <total-tax currency="USD">0.0</total-tax>
+    <shipping>
+      <pickup-shipping-adjustment>
+        <shipping-name>Pickup</shipping-name>
+        <shipping-cost currency="USD">0.0</shipping-cost>
+      </pickup-shipping-adjustment>
+    </shipping>
+    <adjustment-total currency="USD">0.0</adjustment-total>
+  </order-adjustment>
+  <buyer-id>275268423141533</buyer-id>
+  <buyer-marketing-preferences>
+    <email-allowed>false</email-allowed>
+  </buyer-marketing-preferences>
+  <buyer-shipping-address>
+    <address1>1234 Main St</address1>
+    <address2></address2>
+    <phone></phone>
+    <email>john.beppu@gmail.com</email>
+    <contact-name>John Beppu</contact-name>
+    <company-name></company-name>
+    <fax></fax>
+    <country-code>US</country-code>
+    <city>South Pasadena</city>
+    <postal-code>91030</postal-code>
+    <region>CA</region>
+  </buyer-shipping-address>
+  <order-total currency="USD">340.0</order-total>
+  <fulfillment-order-state>NEW</fulfillment-order-state>
+  <financial-order-state>REVIEWING</financial-order-state>
+</new-order-notification>
