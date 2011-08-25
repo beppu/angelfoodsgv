@@ -9,7 +9,6 @@ class Purchase {
   public $menu_id;
   public $session_id;
   public $receipt_id;
-  public $google_serial_number;
   public $google_order_number;
   public $family_name;
   public $phone_number;
@@ -74,6 +73,18 @@ class Purchase {
   }
 
   /**
+   * Retrieve a purchase from the database by google_order_number.
+   *
+   * @param   string  $id   the receipt_id of this purchase
+   * @return  Purchase      a Purchase object
+   */
+  static function find_by_google_order_number($google_order_number) {
+    $rs = mysql_query(sprintf("SELECT * FROM purchase WHERE google_order_number = '%s'", q($google_order_number)));
+    $purchase = mysql_fetch_object($rs, 'Purchase');
+    return $purchase;
+  }
+
+  /**
    * Insert an purchase into the database.
    *
    * @return  boolean       Was the insert successful?
@@ -104,8 +115,8 @@ class Purchase {
    */
   function update() {
     $rs = mysql_query(sprintf(
-      "UPDATE purchase SET google_serial_number = '%s' WHERE id = %d",
-      q($this->google_serial_number), q($this->id)
+      "UPDATE purchase SET google_order_number = '%s' WHERE id = %d",
+      q($this->google_order_number), q($this->id)
     ));
     return $rs;
   }
