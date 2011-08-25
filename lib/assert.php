@@ -26,4 +26,11 @@ ok($n->is_handled,                 "is_handled should now be true");
 $n->create();
 ok($n->id, "should have an id");
 
+#_____________________________________________________________________________
+$n = new Notification();
+$xml = file_get_contents('2.xml');
+$n->parse($xml)->handle()->create();
+$purchase = Purchase::find_by_google_order_number($n->google_order_number);
+ok($purchase->status == "paid", "Purchase should be paid");
+
 ?>

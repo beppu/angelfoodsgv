@@ -87,7 +87,7 @@ class Notification {
       case "order-state-change-notification":
         // IF   new-financial-order-state is CHARGED 
         // THEN set the associated Purchase to paid
-        $nl - $xpath->query('//g:new-financial-order-state');
+        $nl = $xpath->query('//g:new-financial-order-state');
         if ($nl->length > 0) {
           $state = $nl->item(0)->nodeValue;
           if ($state == "CHARGED") {
@@ -97,7 +97,7 @@ class Notification {
           }
         } else {
           $sn = $this->google_serial_number;
-          error_log("google_serial_number: $sn // no order-state-change-notification?");
+          error_log("google_serial_number: $sn // no new-financial-order-state?");
         }
         break;
 

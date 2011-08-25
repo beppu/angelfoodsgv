@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <order-state-change-notification xmlns="http://checkout.google.com/schema/2" serial-number="632177036246335-00005-1">
   <new-fulfillment-order-state>NEW</new-fulfillment-order-state>
-  <new-financial-order-state>CHARGEABLE</new-financial-order-state>
+  <new-financial-order-state>CHARGED</new-financial-order-state>
   <previous-fulfillment-order-state>NEW</previous-fulfillment-order-state>
   <previous-financial-order-state>REVIEWING</previous-financial-order-state>
   <timestamp>2011-08-23T04:08:03.487Z</timestamp>
