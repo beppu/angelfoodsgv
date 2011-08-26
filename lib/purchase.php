@@ -90,6 +90,7 @@ class Purchase {
    * @return  boolean       Was the insert successful?
    */
   function create() {
+    global $config;
     $rs = mysql_query(sprintf("
       INSERT INTO purchase (menu_id, session_id, family_name, phone_number, status, created_on)
       VALUES (%d, '%s', '%s', '%s', '%s', '%s')",
@@ -435,7 +436,7 @@ class Purchase {
    */
   function google_checkout_post($api_method, $xml="", $headers=null) {
     global $config;
-    $ch = curl_init(sprintf($config->google_checkout_api_url, $api_method));
+    $ch = curl_init( sprintf($config->google_checkout_api_url, $api_method) );
     if ($ch) {
       curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: text/xml"));
       curl_setopt($ch, CURLOPT_POST, 1);
