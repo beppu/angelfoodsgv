@@ -1,1 +1,1 @@
-alter table purchase drop column google_serial_number;
+alter table purchase drop column google_order_number;
