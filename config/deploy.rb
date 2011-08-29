@@ -6,7 +6,7 @@ set :scm, :git
 
 role :web, "bavl.org"                          # Your HTTP server, Apache/etc
 role :app, "bavl.org"                          # This may be the same as your `Web` server
-role :db,  "bavl.org", :primary => true # This is where Rails migrations will run
+role :db,  "bavl.org", :primary => true        # This is where Rails migrations will run
 role :db,  "bavl.org"
 
 # if you're still using the script/reaper helper you will need
