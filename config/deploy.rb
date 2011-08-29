@@ -9,15 +9,6 @@ role :app, "bavl.org"                          # This may be the same as your `W
 role :db,  "bavl.org", :primary => true # This is where Rails migrations will run
 role :db,  "bavl.org"
 
-namespace :my do
-  desc "My first task"
-  task :hello, :roles => :app do
-    run "echo hello"
-    puts self.class
-    puts self.methods.sort
-  end
-end
-
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
