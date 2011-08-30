@@ -26,6 +26,7 @@ Released   : 20100423
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine:bold">
 <link href="/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/css/main.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="/css/print.css" rel="stylesheet" type="text/css" media="print" />
 <link href="/css/jquery.gritter.css" rel="stylesheet" type="text/css" media="screen" />
 <style type="text/css">
 @import "/css/slidertron.css";

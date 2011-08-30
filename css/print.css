@@ -1,0 +1,48 @@
+#header,
+#page-bgtop {
+  display: none;
+}
+
+#calendar-section h1 {
+  padding: 0.5em;
+  text-transform: none;
+}
+
+#calendar {
+  border-spacing: 0;
+  background: #FFFFFF;
+}
+
+#calendar td {
+  height: 180px;
+  width: 20%;
+  vertical-align: top;
+}
+
+#calendar td.none {
+  background-color: #000000;
+}
+
+#calendar td.dismissal {
+  background-color: #FF99CC;
+}
+
+#calendar td.holiday {
+  background-color: #FFCCEE;
+}
+
+#calendar td h4 {
+  margin: 4px 4px;
+  color: #808020;
+  text-align: left;
+}
+
+#calendar td h5 {
+  margin: 8px 0;
+  color: #002020;
+  font-size: 1em;
+}
+
+#calendar td ul {
+  list-style: none;
+}
