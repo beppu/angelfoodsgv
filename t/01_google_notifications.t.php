@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-require('init.php');
-require('notification.php');
-require('test.php');
+require('../lib/init.php');
+require('../lib/notification.php');
+require('../lib/test.php');
 
 $n = new Notification();
 $xml = file_get_contents('1.xml');
