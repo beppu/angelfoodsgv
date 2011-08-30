@@ -1,10 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+
+#logo h1 {
+  letter-spacing: -1px;
+  font-family: 'Tangerine', serif;
+  font-size: 50px;
+  text-shadow: 2px 2px 2px #aac;
+  padding: 0;
+  margin: 0.2em 0;
+}
+
+hr {
+  display: none;
+}
+
 #header,
 #page-bgtop {
   display: none;
 }
 
 #calendar-section h1 {
-  padding: 0.5em;
+  padding: 0;
+  margin: 0.2em 0;
   text-transform: none;
 }
 
@@ -14,9 +34,10 @@
 }
 
 #calendar td {
-  height: 180px;
+  height: 130px;
   width: 20%;
   vertical-align: top;
+  border: 1px solid black;
 }
 
 #calendar td.none {
@@ -40,9 +61,11 @@
 #calendar td h5 {
   margin: 8px 0;
   color: #002020;
+  text-align: center;
   font-size: 1em;
 }
 
 #calendar td ul {
   list-style: none;
+  padding-left: 10px; 
 }
