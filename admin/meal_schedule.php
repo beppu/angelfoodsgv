@@ -27,13 +27,11 @@ $days    = $menu->items('food');
   <tbody>
   <?php
   foreach ($days as $item) {
-    $parts = explode('|', $item->body);
-    # $extra = "(" . implode(', ', $parts) . ")";
   ?>
     <tr>
       <td><a href="meal_day.php?menu_id=<?= $menu->id ?>&amp;day=<?= $item->day ?>"><?= sprintf('%02d/%02d', $menu->month, $item->day) ?></a></td>
       <td><?= date('l', $menu->timestamp_for_day($item->day)) ?></td>
-      <td><?= $item->title ?> <?= #$extra ?></td>
+      <td><?= $item->title ?></td>
       <td class="numeric"><?= $item->regulars ?></td>
       <td class="numeric"><?= $item->doubles ?></td>
       <td class="numeric"><?= $item->orders ?></td>
