@@ -18,6 +18,10 @@ ul.picker li {
   border: 1px solid #000;
 }
 
+ul.picker li.none {
+  border: 1px dashed #777;
+}
+
 ul.picker li.regular {
   background: #C0FFC0;
 }
