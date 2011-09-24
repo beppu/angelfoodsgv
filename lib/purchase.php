@@ -181,6 +181,7 @@ class Purchase {
   function items() {
     $rs = mysql_query(sprintf("
       SELECT pi.*,
+             concat(m.month, '/', mi.day) as mmdd,
              mi.title
         FROM purchase_item pi
              JOIN purchase p   ON pi.purchase_id = p.id
