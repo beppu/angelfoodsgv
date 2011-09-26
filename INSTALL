@@ -4,17 +4,17 @@
   # Replace "/path/to/angelfoodsgv" with the path to where angelfoodsgv is
   # located on your system.
   <VirtualHost *:80>
-      ServerName angelfoodsgv.local
-      DocumentRoot /path/to/angelfoodsgv
-      DirectoryIndex index.html index.php
-      ErrorLog "logs/angelfoodsgv.local-error_log"
-      CustomLog "logs/angelfoodsgv.local-access_log" common
-      <Directory /path/to/angelfoodsgv>
-          Options Indexes FollowSymLinks MultiViews
-          AllowOverride All
-          Order allow,deny
-          Allow from all
-      </Directory>
+    ServerName angelfoodsgv.local
+    DocumentRoot /path/to/angelfoodsgv
+    DirectoryIndex index.html index.php
+    ErrorLog "logs/angelfoodsgv.local-error_log"
+    CustomLog "logs/angelfoodsgv.local-access_log" common
+    <Directory /path/to/angelfoodsgv>
+      Options Indexes FollowSymLinks MultiViews
+      AllowOverride All
+      Order allow,deny
+      Allow from all
+    </Directory>
   </VirtualHost>
 
 2. Create a database.
