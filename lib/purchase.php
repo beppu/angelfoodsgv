@@ -245,6 +245,7 @@ class Purchase {
       return false;
     }
 
+    /*
     $rs = mysql_query(sprintf("
       SELECT purchase_id, child_name, child_grade, t,
              SUM(price) AS price,
@@ -255,17 +256,20 @@ class Purchase {
        ORDER BY child_name, child_grade, t",
       q($this->id)
     ));
+    */
 
-    $items = array();
-    while ($s = mysql_fetch_object($rs)) {
+    $items = $this->items();
+    $list  = array();
+    foreach ($items as $s) {
+      $mmdd = $s->mmdd;
       $item = new stdClass();
-      $item->name        = ($s->t == "regular") ? "Lunch" : "Double Entreé";
+      $item->name        = ($s->t == "regular") ? "$mmdd Lunch" : "$mmdd Double Entreé";
       $item->description = sprintf("%s - %s", $s->child_name, grade($s->child_grade));
       $item->price       = ($s->t == "regular") ? $menu->regular_price : $menu->double_price;
-      $item->quantity    = $s->quantity;
-      array_push($items, $item);
+      $item->quantity    = "1";
+      array_push($list, $item);
     }
-    return $items;
+    return $list;
   }
 
   /**
