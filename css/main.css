@@ -102,6 +102,10 @@ div.informational p {
   font-size: 2em;
 }
 
+#order div.family-info h4 {
+  font-size: 1.2em;
+}
+
 #order td.closer {
   text-align: center;
   cursor: pointer;
@@ -118,13 +122,14 @@ div.informational p {
 
 #buttons div.add {
   float: left;
-  padding: 1em;
+  padding: 1em 0;
   font-size: 1.2em;
   cursor: pointer;
 }
 
 #buttons div.purchase {
   float: right;
+  margin-right: -4px;
 }
 
 div.info {
