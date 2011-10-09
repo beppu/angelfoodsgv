@@ -16,3 +16,9 @@ namespace :my do
   end
 end
 
+namespace :deploy do
+  desc "Nothing for now"
+  task :finalize_update do
+  end
+end
+
