@@ -160,7 +160,7 @@ $food_days = $menu->items('food');
     <table cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
-          <td width="120">Lunch</td>
+          <td width="106">Lunch</td>
           <td class="numeric">$<?= $menu->regular_price ?></td>
           <td><ul class="picker"><li class="regular">&nbsp;1</li></ul> Click Box Once</td>
         </tr>
