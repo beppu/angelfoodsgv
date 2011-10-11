@@ -199,6 +199,11 @@
         return false;
       } else {
 
+        $.gritter.add({
+          title : "Thank you!",
+          text  : "Redirecting you to Google Checkout..."
+        });
+
         // XXX
         /*
         $.gritter.add({
