@@ -237,7 +237,7 @@ ul.picker li {
   display: inline;
   padding: 2px;
   margin: 0;
-  font-family: fixed;
+  font-family: sans-serif;
   font-size: x-small;
   border: 1px solid black;
   cursor: pointer;
